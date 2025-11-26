@@ -1,0 +1,21 @@
+﻿@model ProjectLTWwarriors.Models.Products
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="bg-light">THÊM SẢN PHẨM</h2>
+
+
+@using (Html.BeginForm("Create", "Products", FormMethod.Post, new { area = "Admin" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Partial("PVCreateEditProduct", Model)
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/Header.css" rel="stylesheet" />
+    <link href="~/Content/Footer.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @Html.Partial("Header")
+
+    <main class="content-wrapper">
+        @RenderBody()
+    </main>
+
+    @Html.Partial("Footer")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // ===== HÀM CẬP NHẬT SỐ LƯỢNG Ở ICON GIỎ HÀNG =====
+            function updateCartCount() {
+                fetch('/Home/GetCartCount')
+                    .then(r => r.json())
+                    .then(d => {
+                        const el = document.getElementById('cart-count');
+                        if (el && d) el.textContent = d.count;
+                    })
+                    .catch(err => console.error('Lỗi lấy số lượng giỏ hàng:', err));
+            }
+
+            // --- Khi trang vừa load: lấy số lượng giỏ hàng hiện tại ---
+            updateCartCount();
+
+            // --- Khi người dùng bấm "Thêm vào giỏ hàng" ---
+            document.body.addEventListener('click', function (e) {
+                const btn = e.target.closest('[data-add-to-cart]');
+                if (!btn) return;
+
+                const id = btn.getAttribute('data-masp');
+
+                // Mặc định lấy data-qty trên nút
+                let qty = parseInt(btn.getAttribute('data-qty'), 10) || 1;
+
+                // Nếu trên trang có ô #soLuongMua (trang ProductDetail) thì ưu tiên lấy giá trị đó
+                const inputQty = document.getElementById('soLuongMua');
+                if (inputQty) {
+                    const v = parseInt(inputQty.value, 10);
+                    if (!isNaN(v) && v > 0) {
+                        qty = v;
+                    }
+                }
+
+                // Gửi request lên server
+                fetch('/Home/ThemVaoGio', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                    },
+                    body: `maSP=${encodeURIComponent(id)}&soLuong=${encodeURIComponent(qty)}`
+                })
+                    .then(r => r.json())
+                    .then(d => {
+                        if (d && d.success) {
+                            alert(d.message || 'Đã thêm sản phẩm vào giỏ hàng!');
+                            // Sau khi thêm thành công -> gọi lại API đếm giỏ
+                            updateCartCount();
+                        } else {
+                            alert((d && d.message) || 'Không thể thêm sản phẩm!');
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert('Có lỗi xảy ra, không thể thêm sản phẩm!');
+                    });
+            });
+        });
+    </script>
+</body>
+</html>

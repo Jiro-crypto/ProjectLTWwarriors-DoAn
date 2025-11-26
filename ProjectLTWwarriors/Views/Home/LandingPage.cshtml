@@ -1,0 +1,25 @@
+﻿
+
+@model ProjectLTWwarriors.Models.ViewModel.HomeProductVM
+
+@{
+    ViewBag.Title = "LTW Warriors";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/LandingPage.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+<div>
+
+    <a class="Banner" href="@Url.Action("LandingPage", "Home")"></a>
+
+    @* GIỐNG CẤU TRÚC BÊN TH: DÙNG PARTIAL *@
+
+    @* 1. Sản phẩm nổi bật *@
+   
+
+    @* 2. Danh sách sản phẩm theo từng danh mục (iPhone, Mac, iPad, Watch, Tai nghe & Loa, Phụ kiện) *@
+    @Html.Partial("_PVNewProduct", Model)
+
+</div>

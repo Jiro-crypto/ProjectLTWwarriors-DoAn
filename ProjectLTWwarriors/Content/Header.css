@@ -1,0 +1,278 @@
+﻿/* ====== RESET CƠ BẢN CHO TRANG ====== */
+body {
+    margin: 0; /* Xóa khoảng trắng mặc định của trình duyệt */
+    padding: 0; /* Xóa phần đệm mặc định của trình duyệt */
+}
+
+.header-wrapper {
+    width: 100%; /* Luôn luôn rộng 100% */
+    background-color: ghostwhite; /* Chuyển màu nền từ .Header ra đây */
+    }
+
+
+    /* ====== PHẦN HEADER CHÍNH ====== */
+.Header {
+    
+    display: flex; /* Dùng flexbox để các phần tử con nằm ngang */
+    align-items: center; /* Căn giữa các phần tử theo trục dọc */
+    justify-content: space-between; /* Cách đều: logo trái, menu giữa, icon phải */
+    padding: 0 40px; /* Chừa khoảng cách hai bên trái phải */
+    height: 84px; /* Chiều cao cố định cho header */
+    box-sizing: border-box; /* Đảm bảo padding không làm tăng tổng chiều cao */
+    gap: 50px; /* Khoảng cách giữa các phần tử bên trong (nếu còn trống giữa) */
+
+    max-width: 1500px; /* Đặt chiều rộng tối đa  */
+    margin: 0 auto; /* Tự động căn giữa theo chiều ngang */
+    width: 100%; /* Đảm bảo nó co giãn khi màn hình nhỏ */
+}
+
+/* ====== LOGO ====== */
+.Logo {
+    color: #000; /* Màu chữ đen */
+    font-family: sans-serif; /* Kiểu chữ hiện đại, không chân */
+    font-size: 25px; /* Cỡ chữ lớn cho logo */
+    font-weight: 700; /* In đậm logo */
+    line-height: 140%; /* Tăng chiều cao dòng cho cân đối */
+    cursor: pointer; /* Con trỏ thành bàn tay khi rê vào logo */
+}
+
+/* ====== THANH ĐIỀU HƯỚNG (NAVIGATION) ====== */
+
+/* (1) Style cho danh sách <ul> chứa các mục menu */
+.Nav ul {
+    display: flex; /* Các <li> nằm ngang */
+    align-items: center; /* Căn giữa theo chiều dọc trong thanh header */
+    height: 84px; /* Cùng chiều cao với header để thẳng hàng */
+    gap: 69px; /* Khoảng cách giữa các mục menu */
+    list-style-type: none; /* Bỏ dấu chấm đầu dòng mặc định */
+    margin: 0;
+    padding: 0;
+}
+
+/* (2) Mỗi mục <li> sẽ có chiều cao bằng 100% của thanh nav */
+.Nav li {
+    height: 100%; /* Giúp <a> bên trong có thể căn giữa hoàn toàn */
+}
+
+/* (3) Style cho từng link <a> trong menu */
+.NavText {
+    display: flex; /* Cho phép dùng align-items để căn giữa nội dung trong <a> */
+    align-items: center; /* Căn giữa chữ theo chiều dọc */
+    height: 100%; /* Chiếm toàn bộ chiều cao của header */
+    color: #000; /* Màu chữ đen */
+    font-family: sans-serif; /* Giống font chung */
+    font-size: 18px; /* Cỡ chữ menu */
+    font-weight: 500; /* Đậm vừa phải */
+    text-decoration: none; /* Bỏ gạch chân link */
+    cursor: pointer; /* Con trỏ dạng bàn tay khi hover */
+}
+
+/* ====== THANH TÌM KIẾM ====== */
+.Search {
+    flex: 0 0 100px; /* Mở rộng vừa đủ không gian còn lại giữa logo và nav/icon */
+    margin: 0 20px; /* Chừa khoảng cách hai bên */
+    height: 40px; /* Chiều cao thanh tìm kiếm */
+    border-radius: 100px; /* Bo tròn toàn phần */
+    display: flex; /* Để input và icon nằm cùng hàng */
+    align-items: center; /* Căn giữa icon và text theo chiều dọc */
+    position: relative; /* Cho phép định vị icon bên trong */
+    border: 1px solid #ddd; /* Tạo viền xám nhạt */
+    background-color: #fff; /* Nền trắng */
+}
+
+    /* (2) Ô input bên trong thanh tìm kiếm */
+    .Search input {
+        flex: 0 0 100px; /* Input chiếm toàn bộ phần còn lại */
+        height: 100%; /* Bằng chiều cao khung cha */
+        border-radius: 100px; /* Bo tròn đồng nhất */
+        background: transparent; /* Trong suốt để nhìn thấy viền cha */
+        border: none; /* Bỏ viền mặc định của input */
+        font-size: 15px; /* Cỡ chữ nhập liệu */
+        outline: none; /* Bỏ viền xanh khi focus */
+        padding-left: 50px; /* Chừa chỗ bên trái cho icon */
+        padding-right: 20px; /* Khoảng cách phải cho thoáng */
+    }
+
+    /* (3) Icon tìm kiếm nằm trong thanh input */
+    .Search .SearchIcon {
+        position: absolute; /* Định vị tự do trong khung .Search */
+        top: 50%; /* Đưa icon xuống giữa chiều cao */
+        transform: translateY(-50%); /* Căn chính giữa tuyệt đối theo trục dọc */
+        color: #888; /* Màu xám nhẹ */
+        cursor: pointer; /* Hiện bàn tay khi hover */
+        left: 20px; /* Cách mép trái 20px */
+    }
+
+    /* (4) Tùy chỉnh placeholder cho đẹp */
+    .Search input::placeholder {
+        color: #888; /* Màu giống icon */
+        opacity: 1; /* Giữ độ đậm thay vì bị mờ trên một số trình duyệt */
+    }
+
+/* ====== ICON GIỎ HÀNG ====== */
+.cart-icon {
+    font-size: 24px; /* Kích thước icon lớn hơn chữ */
+    color: orange; /* Màu mặc định của icon */
+    cursor: pointer; /* Hiện bàn tay khi hover */
+    transition: 0.3s; /* Hiệu ứng mượt khi đổi màu hoặc phóng to */
+}
+
+    /* Hiệu ứng khi rê chuột lên icon giỏ hàng */
+    .cart-icon:hover {
+        color: #ff6600; /* Màu cam đậm hơn */
+        transform: scale(1.2); /* Phóng to nhẹ */
+    }
+
+/* ====== HIỂN THỊ SỐ LƯỢNG TRÊN ICON GIỎ HÀNG ====== */
+.gio-hang {
+    position: relative; /* Cho phép số lượng nằm đè lên icon */
+    display: inline-block;
+}
+
+.so-luong-gio {
+    position: absolute;
+    top: -8px; /* Đưa lên phía trên icon */
+    right: -10px; /* Đưa sang phải icon */
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .so-luong-gio:empty {
+        display: none;
+    }
+
+/* ====== QUY TẮC RIÊNG CHO LINK TRONG HEADER ====== */
+.Header .Nav a {
+    color: #333; /* Màu chữ bình thường */
+    text-decoration: none; /* Không gạch chân */
+}
+
+    /* Khi rê chuột vào link trong header */
+    .Header .Nav a:hover {
+        color: #d70018; /* Màu đỏ nổi bật */
+    }
+
+/* ====== STYLE CHUNG CHO TOÀN TRANG ====== */
+body {
+    font-family: Arial, sans-serif; /* Font tổng thể */
+    margin: 0;
+    padding: 0;
+    background-color: #fff; /* Nền trắng toàn trang */
+}
+
+/* ====== LINK CHUNG TRÊN TRANG ====== */
+a {
+    text-decoration: none; /* Bỏ gạch chân link */
+    color: #333; /* Màu chữ mặc định */
+    transition: color 0.3s; /* Hiệu ứng mượt khi đổi màu */
+}
+
+    /* Khi rê chuột vào link nói chung */
+    a:hover {
+        color: #000; /* Đậm hơn một chút khi hover */
+    }
+
+/* ====== RESET CHO DANH SÁCH ====== */
+ul {
+    list-style: none; /* Bỏ dấu chấm */
+    padding: 0;
+    margin: 0;
+}
+
+
+
+/*tablet*/
+@media (max-width: 1023px) {
+    .Header {
+        padding: 0 20px;
+        gap: 20px;
+    }
+
+    .Nav ul {
+        gap: 30px;
+    }
+
+    .NavText {
+        font-size: 16px;
+    }
+
+    .Search {
+        flex: 0 0 80px;
+        height: 36px;
+    }
+
+    .cart-icon {
+        font-size: 22px;
+    }
+
+    /* Ẩn input khi ở tablet */
+    .Search input {
+        display: none;
+    }
+
+    .Search {
+        width: auto;
+    }
+
+    .Search i {
+        font-size: 22px;
+        cursor: pointer;
+    }
+}
+
+
+/*mobile */
+@media (max-width: 767px) {
+    .menu-icon {
+        display: block;
+        font-size: 28px;
+        cursor: pointer;
+    }
+
+    /* Ẩn menu mặc định khi trên mobile */
+    .Nav ul {
+        display: none;
+        flex-direction: column;
+        background: white;
+        position: absolute;
+        top: 80px;
+        right: 20px;
+        padding: 10px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .Nav ul.show {
+        display: flex;
+    }
+
+    /* Ẩn ô nhập tìm kiếm */
+    .Search input {
+        display: none;
+    }
+
+    .Search {
+        width: auto;
+    }
+
+    .Search i {
+        font-size: 22px;
+        cursor: pointer;
+    }
+}
+
+@media (min-width: 768px) {
+    .menu-icon {
+        display: none;
+    }
+}
+
+

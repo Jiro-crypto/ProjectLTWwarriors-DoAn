@@ -1,0 +1,119 @@
+﻿
+
+@model ProjectLTWwarriors.Models.ViewModel.HomeProductVM
+
+
+
+@{
+    var categories = new List<string>
+{
+        "iPhone",
+        "Mac",
+        "iPad",
+        "Watch",
+        "Tai Nghe, Loa",
+        "Phụ Kiện"
+    };
+
+    // Chia nhóm sản phẩm nếu có nhiều hơn 4 sản phẩm trong danh mục
+    int maxItemsPerPage = 4;
+}
+<style>
+    .Danh_Sach_San_Pham {
+        position: relative; /* Để các mũi tên có thể được căn chỉnh */
+        
+    }
+
+    .Danh_Sach_San_Pham_Group {
+        display: none; /* Ẩn tất cả các nhóm sản phẩm mặc định */
+        gap:15px;
+    }
+
+        .Danh_Sach_San_Pham_Group:first-of-type {
+            display: flex; /* Hiển thị nhóm đầu tiên */
+        }
+
+    .Danh_Sach_San_Pham_Navigation {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+
+    .prev-arrow, .next-arrow {
+        cursor: pointer;
+        font-size: 20px;
+        padding: 5px 10px;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+    }
+
+        .prev-arrow:hover, .next-arrow:hover {
+            background-color: #ddd;
+        }
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.prev-arrow, .next-arrow').forEach(button => {
+            button.addEventListener('click', function () {
+                const category = this.getAttribute('data-category');
+                const groups = document.querySelectorAll(`#DanhSach_${category} .Danh_Sach_San_Pham_Group`);
+                let currentGroupIndex = Array.from(groups).findIndex(group => group.style.display === 'flex');
+
+                // Xử lý vòng quay giữa các nhóm
+                currentGroupIndex = (currentGroupIndex + (this.classList.contains('next-arrow') ? 1 : -1) + groups.length) % groups.length;
+
+                // Ẩn nhóm hiện tại và hiển thị nhóm tiếp theo
+                groups.forEach((group, index) => group.style.display = (index === currentGroupIndex) ? 'flex' : 'none');
+            });
+        });
+    });
+</script>
+@foreach (var catName in categories)
+{
+    var items = Model.NewProducts.Where(p => p.Categories?.Name == catName).ToList();
+
+    if (items.Any())
+    {
+        var groupedItems = items.Select((item, index) => new { Item = item, Group = index / maxItemsPerPage }).GroupBy(x => x.Group).ToList();
+
+        <div class="Bo_Khung_San_Pham">
+            <p class="Bo_Khung_San_Pham_Title">@catName</p>
+            <div class="Danh_Sach_San_Pham" id="DanhSach_@catName">
+                @foreach (var group in groupedItems)
+                {
+                    <div class="Danh_Sach_San_Pham_Group" data-group="@group.Key">
+                        @foreach (var product in group)
+                        {
+                            <div class="The_San_Pham">
+                                <a href="@Url.Action("ProductDetail", "Home", new { id = product.Item.Id })">
+                                    <img class="TheSanPham_HinhAnh" src="@Url.Content(product.Item.ProductImages.FirstOrDefault(i => i.IsPrimary)?.ImageUrl ?? "~/Content/no-image.png")" />
+                                    <p class="TheSanPham_TenThietBi">@product.Item.Name</p>
+
+                                </a>
+                                <div>
+                                    <p class="TheSanPham_Gia">@($"{product.Item.Price:N0} đ")</p>
+                                </div>
+
+                            </div>
+                            
+
+                        }
+                    </div>
+                }
+
+                @if (groupedItems.Count > 1)
+                {
+                    <div class="Danh_Sach_San_Pham_Navigation">
+                        <span class="prev-arrow" data-category="@catName">←</span>
+                        <span class="next-arrow" data-category="@catName">→</span>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+}

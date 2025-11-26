@@ -1,0 +1,139 @@
+﻿/* ====== RESET CƠ BẢN ====== */
+body {
+    margin: 0; /* Xóa lề mặc định của trình duyệt */
+    padding: 0; /* Xóa đệm mặc định */
+}
+
+/* ====== PHẦN FOOTER CHÍNH ====== */
+.site-footer {
+    background-color: ghostwhite; /* Màu nền nhạt cho footer */
+    color: #333; /* Màu chữ mặc định */
+    padding: 50px 0 20px 0; /* Trên 50px, dưới 20px, hai bên 0 */
+    margin-top: 50px; /* Cách phần nội dung phía trên một đoạn */
+    flex-grow: 1;
+}
+
+/* ====== CONTAINER CHỨA TOÀN BỘ CỘT TRONG FOOTER ====== */
+.footer-container {
+    max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+    margin: 0 auto; /* Căn giữa container theo chiều ngang */
+    padding: 0 20px; /* Chừa lề hai bên cho đẹp */
+    display: flex; /* Dùng flexbox để sắp xếp các cột */
+    justify-content: center; /* Căn giữa các cột */
+    flex-wrap: wrap; /* Cho phép các cột tự xuống hàng khi màn hình nhỏ */
+    gap: 20px; /* Khoảng cách giữa các cột */
+}
+
+/* ====== MỖI CỘT TRONG FOOTER ====== */
+.footer-column {
+    flex: 1; /* Mỗi cột chiếm đều không gian còn lại */
+    min-width: 180px; /* Đảm bảo không nhỏ hơn 180px */
+    margin-bottom: 30px; /* Khoảng cách giữa các hàng cột khi xuống dòng */
+}
+
+    /* Tiêu đề của mỗi cột (ví dụ: Liên hệ, Về chúng tôi,...) */
+    .footer-column h4 {
+        font-size: 16px; /* Cỡ chữ tiêu đề */
+        font-weight: bold; /* In đậm */
+        margin-top: 0;
+        margin-bottom: 20px; /* Cách nội dung bên dưới */
+        color: #000; /* Màu đen nổi bật hơn */
+    }
+
+/* Class phụ để tạo khoảng cách thêm cho tiêu đề thứ hai (nếu cần) */
+.extra-margin-top {
+    margin-top: 30px;
+}
+
+/* Các dòng nội dung trong cột (li) */
+.footer-column li {
+    margin-bottom: 12px; /* Khoảng cách giữa các dòng trong danh sách */
+}
+
+/* ====== NHÓM ICON MẠNG XÃ HỘI (Facebook, Twitter, ...) ====== */
+.social-icons {
+    display: flex; /* Xếp icon nằm ngang */
+    flex-wrap: wrap; /* Cho phép xuống hàng nếu không đủ chỗ */
+    gap: 10px; /* Khoảng cách giữa các icon */
+    margin-bottom: 20px; /* Cách phần dưới */
+}
+
+    /* Mỗi icon là một thẻ <a> hình tròn */
+    .social-icons a {
+        display: flex; /* Dùng flex để căn giữa icon */
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        width: 36px;
+        height: 36px;
+        background-color: white; /* Màu nền đen */
+        color: white; /* Màu icon trắng */
+        border-radius: 50%; /* Tạo hình tròn */
+        font-size: 18px; /* Kích thước icon */
+        transition: background-color 0.3s; /* Hiệu ứng mượt khi hover */
+    }
+
+        /* Khi rê chuột vào icon */
+        .social-icons a:hover {
+            background-color: ghostwhite; /* Màu xám khi hover */
+            color: #fff; /* Giữ màu trắng cho icon */
+        }
+
+/* ====== NÚT TẢI ỨNG DỤNG (App Store, Google Play) ====== */
+.app-buttons img {
+    width: 135px; /* Kích thước hình logo app */
+    margin-bottom: 15px; /* Cách nhau dọc */
+}
+
+/* ====== DÒNG BẢN QUYỀN Ở DƯỚI CÙNG ====== */
+.footer-bottom {
+    max-width: 1200px; /* Giới hạn chiều rộng */
+    margin: 0 auto; /* Căn giữa */
+    padding: 20px 20px 0 20px; /* Khoảng cách trong phần bản quyền */
+    margin-top: 20px; /* Cách nội dung trên một đoạn */
+    border-top: 1px solid #ddd; /* Đường gạch ngăn cách phần trên */
+    text-align: left; /* Căn chữ sang trái */
+    font-size: 14px; /* Cỡ chữ nhỏ hơn */
+    color: #555; /* Màu chữ xám nhẹ */
+}
+
+/* ====== STYLE LINK TRONG FOOTER ====== */
+/* Đảm bảo quy tắc đủ mạnh để không bị ghi đè bởi file khác */
+.site-footer a {
+    color: #555; /* Màu chữ mặc định trong footer */
+    text-decoration: none; /* Không gạch chân */
+}
+
+    /* Khi rê chuột vào link trong footer */
+    .site-footer a:hover {
+        color: #007bff; /* Chuyển sang xanh */
+        text-decoration: underline; /* Gạch chân khi hover */
+    }
+
+/* ====== CÁC QUY TẮC CHUNG TOÀN TRANG ====== */
+body {
+    font-family: Arial, sans-serif; /* Font chữ phổ biến, dễ đọc */
+    margin: 0;
+    padding: 0;
+    background-color: #fff; /* Nền trắng cho toàn trang */
+}
+
+/* Quy tắc chung cho tất cả các link (ngoài footer) */
+a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+}
+
+    a:hover {
+        color: #000; /* Đậm hơn khi hover */
+    }
+
+/* Quy tắc reset cho danh sách */
+ul {
+    list-style: none; /* Bỏ dấu chấm đầu dòng */
+    padding: 0;
+    margin: 0;
+}
+
+
+

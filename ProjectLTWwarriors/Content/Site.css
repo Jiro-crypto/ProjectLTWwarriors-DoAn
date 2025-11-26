@@ -1,0 +1,62 @@
+﻿/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* ===== Full-bleed cho HEADER & FOOTER (không đổi HTML) ===== */
+
+/* Nền của header tràn hết bề ngang viewport */
+header, .site-header, .topbar, .navbar {
+  position: relative;
+  width: 100vw;                  /* luôn phủ trọn chiều ngang màn hình */
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw); /* kéo ra mép trái */
+  margin-right: calc(50% - 50vw);/* kéo ra mép phải */
+  border-radius: 0 !important;   /* tránh bo góc làm hở nền */
+  z-index: 1000;                 /* không bị banner đè */
+}
+
+/* Footer cũng tràn mép tương tự */
+footer, .site-footer {
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  border-radius: 0 !important;
+}
+
+/* Bảo đảm không tạo thanh cuộn ngang do full-bleed */
+html, body { overflow-x: hidden; }
+
+/* Các icon bên phải không bị co mất */
+.header-actions, .navbar-actions, .header-right {
+  margin-left: auto;
+  display: flex; align-items: center; gap: 8px;
+  flex: 0 0 auto;                /* không co lại */
+  flex-shrink: 0;
+  min-width: fit-content;
+}
+
+/* Ô tìm kiếm/khối ở giữa cho phép co giãn để chừa chỗ icon (nếu có) */
+.header .search-wrap, .navbar .search-wrap,
+.search, .search-form {
+  flex: 1 1 auto;
+  min-width: 0;
+}

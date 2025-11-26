@@ -1,0 +1,24 @@
+﻿@model ProjectLTWwarriors.Models.Categories
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+@* Id: chỉ dùng ở Edit, nên để hidden *@
+@if (Model != null && Model.Id != 0)
+{
+    @Html.HiddenFor(m => m.Id)
+}
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Name, "Tên danh mục", htmlAttributes: new { @class = "control-label" })
+    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Nhập tên danh mục" })
+    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+</div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Lưu" class="btn btn-dark" />
+
+        @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-dark" })
+    </div>
+
+</div>

@@ -1,0 +1,222 @@
+﻿/* === ĐỊNH NGHĨA BIẾN MÀU SẮC & BÓNG ĐỔ === */
+:root {
+    --mau-nen: #fef7f6; /* Màu nền nhạt của toàn trang (tông hồng nhạt ấm) */
+    --mau-trang: #ffffff; /* Màu trắng cơ bản – dùng cho khung, card */
+    --mau-vien: #e0e0e0; /* Màu viền xám nhạt cho các ô, form */
+    --vien-cong: 16px; /* Bán kính bo góc thống nhất cho toàn layout */
+    --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Đổ bóng mềm cho card */
+}
+
+/* === KHUNG TRANG CHÍNH (Container tổng) === */
+.trang-gio-hang-day-du {
+    width: 100%; /* Chiếm toàn bộ chiều ngang trình duyệt */
+    max-width: 1200px; /* Giới hạn chiều rộng tối đa (trang không bị dàn quá rộng) */
+    margin: 40px auto; /* Canh giữa theo chiều ngang, cách trên dưới 40px */
+    padding: 0 20px; /* Chừa khoảng cách hai bên để không dính mép */
+
+}
+
+/* === TIÊU ĐỀ TRANG === */
+.tieu-de-trang {
+    font-size: 32px; /* Cỡ chữ lớn để nổi bật tiêu đề */
+    margin-bottom: 30px; /* Tạo khoảng cách giữa tiêu đề và nội dung */
+    font-weight: 600; /* Chữ đậm vừa (semi-bold) */
+}
+
+/* === BỐ CỤC CHÍNH: 2 CỘT (SẢN PHẨM + THANH TOÁN) === */
+.khung-chinh {
+    display: grid; /* Dùng Grid để chia 2 cột rõ ràng */
+    grid-template-columns: 1fr 420px; /* Cột trái co giãn, cột phải cố định 420px */
+    gap: 30px; /* Khoảng cách giữa 2 cột */
+    align-items: flex-start; /* Căn phần đầu 2 cột thẳng hàng (tránh lệch dọc) */
+}
+
+/* === CỘT TRÁI: DANH SÁCH SẢN PHẨM === */
+.cot-trai {
+    display: flex; /* Dùng Flexbox để xếp dọc các sản phẩm */
+    flex-direction: column; /* Xếp theo cột (trên xuống dưới) */
+    gap: 20px; /* Khoảng cách giữa các sản phẩm */
+}
+
+/* === KHỐI MỖI SẢN PHẨM === */
+.san-pham-trong-gio {
+    display: flex; /* Xếp ảnh - thông tin - giá trên cùng 1 hàng */
+    align-items: center; /* Căn giữa các phần tử theo trục dọc */
+    background-color: var(--mau-trang); /* Nền trắng cho từng sản phẩm */
+    padding: 20px; /* Khoảng trống bên trong khung sản phẩm */
+    border-radius: var(--vien-cong); /* Bo góc mềm mại */
+    box-shadow: var(--box-shadow); /* Bóng đổ nhẹ tạo độ nổi */
+}
+
+/* === ẢNH SẢN PHẨM === */
+.anh-san-pham {
+    width: 100px; /* Chiều rộng ảnh cố định */
+    height: 100px; /* Chiều cao ảnh cố định */
+    border-radius: 12px; /* Bo góc ảnh */
+    margin-right: 20px; /* Tạo khoảng cách với phần thông tin */
+    object-fit: contain; /* Giữ nguyên tỷ lệ ảnh, không cắt mất phần nào */
+}
+
+/* === VÙNG CHỨA THÔNG TIN SẢN PHẨM === */
+.thong-tin-san-pham {
+    flex-grow: 1; /* Chiếm toàn bộ khoảng trống còn lại trong flex container */
+}
+
+/* === TÊN SẢN PHẨM === */
+.ten-san-pham {
+    font-size: 16px; /* Cỡ chữ vừa phải, dễ đọc */
+    font-weight: bold; /* Làm nổi bật tên sản phẩm */
+    margin: 0 0 8px 0; /* Cách dưới 8px, không cách trên hoặc hai bên */
+}
+
+/* === GIÁ TIỀN === */
+.gia-tien {
+    font-size: 16px; /* Cỡ chữ vừa */
+    font-weight: bold; /* Làm đậm giá để dễ nhận biết */
+    margin: 0 20px; /* Cách hai bên một chút */
+    min-width: 120px; /* Giữ cột giá luôn đủ rộng, không co lại */
+    text-align: right; /* Căn phải giá tiền */
+}
+
+/* === BỘ CHỌN SỐ LƯỢNG (+/-) === */
+.bo-chon-so-luong {
+    display: flex; /* Đặt 3 phần tử (–, số, +) trên 1 hàng */
+    align-items: center; /* Căn giữa dọc các nút */
+    border: 1px solid var(--mau-vien); /* Viền xám nhẹ */
+    border-radius: var(--vien-cong); /* Bo góc khối */
+}
+
+/* === NÚT TĂNG / GIẢM VÀ Ô HIỂN THỊ SỐ === */
+.nut-so-luong, .so-luong-hien-tai {
+    width: 35px; /* Chiều rộng ô */
+    height: 35px; /* Chiều cao ô */
+    border: none; /* Bỏ viền mặc định */
+    background: none; /* Nền trong suốt */
+    font-size: 16px; /* Cỡ chữ dễ nhìn */
+    cursor: pointer; /* Con trỏ dạng tay khi rê vào */
+    text-align: center; /* Canh giữa nội dung */
+}
+
+/* === CỘT PHẢI (THÔNG TIN THANH TOÁN + FORM) === */
+.cot-phai {
+    /* Dòng cũ bị comment do thay đổi bố cục: giữ lại để tham khảo */
+    display: flex; /* Dùng flexbox để xếp dọc các khối trong cột phải */
+    gap: 10px; /* Khoảng cách giữa các phần (form, tóm tắt, v.v.) */
+    margin-bottom: 4px; /* Cách đáy 4px nhẹ */
+    flex-direction: column; /* Xếp dọc */
+    width: 100%; /* Cho phép cột phải co giãn theo container */
+}
+
+/* === HỘP FORM ĐĂNG KÝ (hoặc nhập thông tin thanh toán) === */
+.hop-dangky {
+    background-color: white; /* Nền trắng nổi bật */
+    border-radius: 16px; /* Bo góc mềm mại */
+    border: 1px solid #BFC0C0; /* Viền xám nhạt */
+    padding: 20px; /* Khoảng trống trong form */
+    box-shadow: 0 0 5px rgba(0,0,0,0.05); /* Bóng đổ nhẹ để nổi khối */
+    width: 400px; /* Chiều rộng form cố định */
+    height: auto; /* Chiều cao tự động theo nội dung */
+}
+
+/* === DÒNG MÔ TẢ PHÍA TRÊN FORM === */
+.Mo_ta {
+    text-align: center; /* Căn giữa nội dung mô tả */
+    color: #555; /* Màu xám trung tính */
+    font-size: 18px; /* Cỡ chữ vừa phải */
+    margin-bottom: 4px; /* Cách dưới nhẹ */
+    margin-top: 4px; /* Cách trên nhẹ */
+    font-weight: bold; /* Làm đậm mô tả */
+}
+
+/* === FORM ĐĂNG KÝ / NHẬP LIÊN HỆ === */
+.form_dang_ky {
+    display: flex; /* Dùng flex để sắp xếp các hàng */
+    flex-direction: column; /* Xếp dọc từng hàng nhập */
+    gap: 13px; /* Khoảng cách giữa các hàng */
+}
+
+/* === Ô NHẬP DỮ LIỆU CHUNG === */
+.o-nhap {
+    border: 1px solid #ccc; /* Viền mờ để phân biệt ô nhập */
+    border-radius: 12px; /* Bo góc nhẹ */
+    border-color: #BFC0C0; /* Màu viền chuẩn hơn */
+    padding: 10px 12px; /* Khoảng cách giữa chữ và viền */
+    font-size: 14px; /* Cỡ chữ dễ đọc */
+    width: 100%; /* Chiếm trọn hàng cha */
+    box-sizing: border-box; /* Bao gồm padding trong width */
+    outline: none; /* Bỏ viền xanh khi focus */
+    flex: 1; /* Linh hoạt co giãn nếu nằm trong flex container */
+    max-width: 500px; /* Không vượt quá 500px để tránh giãn rộng quá */
+}
+
+/* === MỖI HÀNG TRONG FORM === */
+.hang-input {
+    display: flex; /* Cho phép đặt nhiều ô nhập trên cùng 1 hàng */
+    gap: 10px; /* Khoảng cách giữa các ô nhập */
+    margin-bottom: 4px; /* Cách nhau chút xíu cho thoáng */
+}
+
+    /* === HÀNG CHỈ CÓ 1 Ô NHẬP (DẠNG FULL-WIDTH) === */
+    .hang-input.single {
+        display: block; /* Chuyển về dạng block (một cột) */
+        width: 100%; /* Chiếm hết chiều ngang form */
+    }
+
+        .hang-input.single .o-nhap {
+            flex: none; /* Không cho co giãn */
+            width: 100%; /* Đầy đủ chiều ngang */
+            display: block; /* Chuyển về block để tránh layout lỗi */
+            box-sizing: border-box; /* Giữ kích thước ổn định */
+        }
+
+/* === NHÃN TRƯỚC Ô NHẬP === */
+.nhan {
+    display: block; /* Xuống dòng riêng */
+    font-weight: bold; /* Làm đậm chữ nhãn */
+    font-size: 14px; /* Cỡ chữ nhỏ vừa */
+    margin-bottom: 8px; /* Cách ô nhập một chút */
+}
+
+/* === TÓM TẮT ĐƠN HÀNG (phần cuối) === */
+.tom-tat-don-hang {
+    border-top: 1px solid var(--mau-vien); /* Đường kẻ phân cách phần form và tóm tắt */
+    padding-top: 20px; /* Cách nội dung phía trên */
+}
+
+/* === MỖI DÒNG TRONG TÓM TẮT === */
+.dong-tom-tat {
+    display: flex; /* Sắp xếp label - giá trên 1 hàng */
+    justify-content: space-between; /* Label bên trái, giá bên phải */
+    margin-bottom: 15px; /* Cách giữa các dòng */
+    font-size: 14px; /* Cỡ chữ nhỏ */
+}
+
+    /* === DÒNG TỔNG CỘNG NỔI BẬT HƠN === */
+    .dong-tom-tat.tong-cong {
+        font-size: 18px; /* Chữ lớn hơn */
+        font-weight: bold; /* Đậm hơn */
+        margin-top: 20px; /* Cách phần trên thêm */
+    }
+
+/* === NÚT THANH TOÁN === */
+.nut-thanh-toan {
+    width: 100%; /* Nút chiếm hết chiều ngang form */
+    background-color: #f7b2b2; /* Màu nền hồng pastel */
+    color: white; /* Màu chữ trắng */
+    padding: 15px; /* Khoảng đệm trong nút */
+    border: none; /* Không viền */
+    border-radius: 12px; /* Bo góc tròn nhẹ */
+    font-size: 16px; /* Cỡ chữ trung bình */
+    font-weight: bold; /* Đậm chữ để nổi bật */
+    cursor: pointer; /* Hiển thị bàn tay khi hover */
+    text-align: center; /* Canh giữa nội dung */
+    text-decoration: none; /* Bỏ gạch chân nếu là thẻ <a> */
+    display: inline-block; /* Cho phép padding hoạt động tốt */
+}
+
+/* === RESPONSIVE: MÀN HÌNH DƯỚI 992PX === */
+@media (max-width: 992px) {
+    .khung-chinh {
+        grid-template-columns: 1fr; /* Bẻ từ 2 cột → 1 cột (stack dọc) */
+    }
+}

@@ -1,0 +1,53 @@
+﻿body { /* Thẻ body của toàn trang */
+}
+/* Hiện tại để trống, có thể thêm background hoặc font sau */
+
+.trang-gio-hang-trong { /* Khung chính khi giỏ hàng trống */
+    text-align: center; /* Căn giữa nội dung theo chiều ngang */
+    padding: 80px 20px; /* Tạo khoảng trống trên/dưới 80px, hai bên 20px */
+    min-height: 60vh; /* Đặt chiều cao tối thiểu bằng 60% chiều cao trình duyệt */
+    display: flex; /* Dùng Flexbox để căn giữa nội dung */
+    align-items: center; /* Căn giữa theo trục dọc (theo chiều cao) */
+    justify-content: center; /* Căn giữa theo trục ngang (theo chiều rộng) */
+}
+/* => Giúp phần thông báo nằm giữa trang */
+
+.bieu-tuong-gio-hang { /* Icon hình giỏ hàng */
+    font-size: 80px; /* Kích thước lớn để nổi bật */
+    color: #ccc; /* Màu xám nhạt biểu thị trạng thái trống */
+    margin-bottom: 24px; /* Tạo khoảng cách phía dưới icon */
+}
+
+.thong-bao-trong { /* Dòng chữ thông báo giỏ hàng trống */
+    font-size: 28px; /* Chữ lớn dễ nhìn */
+    font-weight: 600; /* Độ đậm trung bình */
+    margin-bottom: 32px; /* Cách phía dưới để tách khỏi các nút */
+}
+
+.khu-vuc-nut-bam { /* Khu vực chứa các nút hành động */
+    display: flex; /* Dùng Flexbox sắp xếp nút */
+    flex-direction: column; /* Xếp các nút theo chiều dọc */
+    gap: 16px; /* Khoảng cách giữa các nút */
+    width: 250px; /* Giới hạn độ rộng của cụm nút */
+    margin: 0 auto; /* Căn giữa cụm nút theo chiều ngang */
+}
+
+.nut { /* Kiểu chung cho tất cả các nút */
+    padding: 14px 20px; /* Khoảng trống bên trong nút: 14px dọc, 20px ngang */
+    border: none; /* Loại bỏ viền mặc định */
+    border-radius: 16px; /* Bo tròn góc 16px */
+    font-size: 16px; /* Cỡ chữ chuẩn dễ đọc */
+    font-weight: bold; /* Chữ đậm tạo điểm nhấn */
+    cursor: pointer; /* Hiển thị con trỏ dạng bàn tay khi hover */
+    text-decoration: none; /* Bỏ gạch chân nếu là thẻ <a> */
+    color: white; /* Màu chữ trắng nổi bật */
+    text-align: center; /* Căn giữa chữ trong nút */
+}
+
+.nut-tiep-tuc-mua-sam { /* Nút "Tiếp tục mua sắm" */
+    background-color: #f7b2b2; /* Màu nền hồng nhạt */
+}
+
+.nut-dang-nhap { /* Nút "Đăng nhập" */
+    background-color: #a6c9f5; /* Màu nền xanh nhạt */
+}

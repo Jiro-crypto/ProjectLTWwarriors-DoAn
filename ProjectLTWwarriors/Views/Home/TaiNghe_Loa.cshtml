@@ -1,0 +1,14 @@
+﻿@model List<ProjectLTWwarriors.Models.Products>
+
+@{
+    ViewBag.Title = "TaiNghe_Loa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/TaiNghe_Loa.css" rel="stylesheet" />
+<link href="~/Content/Doisanpham.css" rel="stylesheet" />
+
+@*JAVASCRIPT*@
+
+<script src="~/Scripts/Doisanpham.js"></script>
+
+@Html.Partial("_PVSlider", Model)

@@ -1,0 +1,46 @@
+﻿@model ProjectLTWwarriors.Models.Products
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+@if (Model != null && Model.Id != 0)
+{
+    @Html.HiddenFor(m => m.Id)
+}
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Name, "Tên sản phẩm", new { @class = "control-label" })
+    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Nhập tên sản phẩm" })
+    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Price, "Giá", new { @class = "control-label" })
+    @Html.TextBoxFor(m => m.Price, new { @class = "form-control", type = "number", step = "1000", min = "0" })
+    @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Description, "Mô tả", new { @class = "control-label" })
+    @Html.TextAreaFor(m => m.Description, 5, 50, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+</div>
+
+<div class="form-group">
+    @Html.Label("CategoryId", "Danh mục", new { @class = "control-label" })
+    @Html.DropDownList("CategoryId", null, "-- Chọn danh mục --", new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" })
+</div>
+
+<div class="form-group">
+    <label>Link hình </label>
+    <input type="text" name="imageUrl" class="form-control" />
+</div>
+
+<br/>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Lưu" class="btn btn-dark" />
+        @Html.ActionLink("Quay về danh sách", "Index", null, new { @class = "btn btn-dark" })
+    </div>
+</div>

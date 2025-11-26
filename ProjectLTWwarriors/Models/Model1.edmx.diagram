@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2d078ce4a925479dbb76a40f3f794f63" Name="Diagram1" ZoomLevel="57">
+        <EntityTypeShape EntityType="MyStoreModel.CartItems" Width="1.5" PointX="3.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyStoreModel.Carts" Width="1.5" PointX="0.625" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyStoreModel.OrderItems" Width="1.5" PointX="15.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyStoreModel.Orders" Width="1.5" PointX="7.125" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyStoreModel.ProductColors" Width="1.5" PointX="11.375" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyStoreModel.ProductImages" Width="1.5" PointX="9.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyStoreModel.Products" Width="1.5" PointX="7" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyStoreModel.ProductStorages" Width="1.5" PointX="14.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyStoreModel.Users" Width="1.5" PointX="0.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyStoreModel.database_firewall_rules" Width="1.5" PointX="10.125" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="MyStoreModel.FK_CartItems_Cart" ManuallyRouted="false" />
+        <AssociationConnector Association="MyStoreModel.FK_CartItems_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="MyStoreModel.FK_Carts_User" ManuallyRouted="false" />
+        <AssociationConnector Association="MyStoreModel.FK_OrderItems_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="MyStoreModel.FK_OrderItems_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="MyStoreModel.FK_Orders_User" ManuallyRouted="false" />
+        <AssociationConnector Association="MyStoreModel.FK_ProductColors_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="MyStoreModel.FK_ProductImages_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="MyStoreModel.FK_ProductStorages_Product" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MyStoreModel.Categories" Width="1.5" PointX="3.375" PointY="3" />
+        <AssociationConnector Association="MyStoreModel.FK_Products_Categories" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

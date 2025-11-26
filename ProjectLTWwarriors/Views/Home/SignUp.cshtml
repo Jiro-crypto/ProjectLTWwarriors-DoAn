@@ -1,0 +1,78 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Đăng kí</title>
+    <link href="~/Content/SignUp.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <section>
+            <div class="Nen_trang">
+                <div class="hop-dangky">
+                    <div class="Tieu_de">Tạo tài khoản</div>
+                    <div class="Mo_ta">Khởi đầu hành trình cùng LTW Warriors ngay hôm nay!</div>
+
+                    @using (Html.BeginForm("SignUp", "Home", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="hang-input">
+                            <input type="text" name="Ho" placeholder="Họ" class="o-nhap" required maxlength="30" />
+                            <input type="text" name="Ten" placeholder="Tên" class="o-nhap" required maxlength="30" />
+                        </div>
+
+                        <div class="nhan">Ngày sinh</div>
+                        <div class="hang-input">
+                            <input type="number" name="Ngay" placeholder="Ngày" class="o-nhap" min="1" max="31" required />
+                            <input type="number" name="Thang" placeholder="Tháng" class="o-nhap" min="1" max="12" required />
+                            <input type="number" name="Nam" placeholder="Năm" class="o-nhap" min="1900" max="2025" required />
+                        </div>
+
+                        <div class="hang-input">
+                            <input type="email" name="Email" placeholder="Email" class="o-nhap"
+                                   required minlength="8" maxlength="30" />
+                        </div>
+
+                        <div class="hang-input">
+                            <input type="password" name="MatKhau" placeholder="Mật khẩu" class="o-nhap"
+                                   required minlength="8" maxlength="30" />
+                        </div>
+
+                        <ul class="yeu-cau">
+                            <li>8-30 ký tự</li>
+                            <li>Ít nhất một chữ viết thường</li>
+                            <li>Ít nhất một chữ viết hoa</li>
+                            <li>Ít nhất một chữ viết số</li>
+                            <li>Ít nhất 1 ký tự đặc biệt (vd: !#%^%,v.v)</li>
+                        </ul>
+
+                        <div class="hang-input">
+                            <input type="password" name="XacNhanMatKhau" placeholder="Xác nhận mật khẩu" class="o-nhap"
+                                   required minlength="8" maxlength="30" />
+                        </div>
+
+                        <div class="hang-nut">
+                            <a href="/Home/SignIn" class="nut nut-trang">Trở về</a>
+                            <button type="submit" class="nut nut-do">Tiếp tục</button>
+                        </div>
+
+                        @* Hiện lỗi validate từ controller *@
+                        if (ViewBag.Error != null)
+                        {
+                            <p style="color:red; text-align:center; margin-top:10px;">
+                                @ViewBag.Error
+                            </p>
+                        }
+                    }
+
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

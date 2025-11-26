@@ -1,0 +1,131 @@
+﻿body { /* Đặt các thiết lập mặc định cho toàn trang */
+    margin: 0; /* Xóa khoảng trống mặc định bên ngoài */
+    padding: 0; /* Xóa khoảng trống mặc định bên trong */
+}
+
+.Banner { /* Khu vực banner chính của trang landing page */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px; /* nếu bạn muốn bo thì giữ lại */
+
+    background-image: url('../images_landingpage/bannernew.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; /* hoặc contain nếu muốn giữ nguyên tỉ lệ */
+
+    width: 100%; /* full chiều ngang màn hình */
+    max-width: 1170px;
+    margin: 0 auto 40px;
+    aspect-ratio: 16/5; /*giữ tỉ lệ khung ảnh*/
+}
+
+@media (max-width: 768px) {
+    .Banner {
+        border-radius: 16px;
+        aspect-ratio: 19 / 7; /* tỉ lệ “dễ thở” hơn trên mobile, có thể giữ 16/5 nếu thích */
+    }
+}
+
+.Bo_Khung_San_Pham { /* Bao khung tổng cho phần danh sách sản phẩm */
+    display: flex; /* Sử dụng Flexbox để căn chỉnh bố cục */
+    justify-content: center; /* Căn giữa các phần tử con theo chiều ngang */
+    padding: 0 15px; /* Thêm khoảng cách hai bên để không sát mép */
+    gap: 22px; /* Khoảng cách giữa các phần con */
+    flex-direction: column; /* Ép chữ tiêu đề và danh sách sản phẩm xếp dọc */
+    align-items: center; /* Căn giữa nội dung theo chiều ngang */
+}
+
+.Bo_Khung_San_Pham_Title { /* Tiêu đề “Sản phẩm nổi bật” hoặc tương tự */
+    font-size: 36px; /* Cỡ chữ lớn, nổi bật */
+    font-weight: 600; /* Chữ đậm vừa phải */
+    display: flex; /* Cho phép dùng flex để căn giữa nội dung tiêu đề */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    gap: 8px; /* Khoảng cách giữa các phần tử (vd: icon + chữ) */
+    margin-bottom: 40px; /* Cách phần dưới */
+    margin-top: 40px; /* Cách phần trên */
+    font-family: sans-serif; /* Font đơn giản, dễ đọc */
+    color: #000; /* Màu chữ đen */
+}
+
+.Danh_Sach_San_Pham { /* Khu vực chứa toàn bộ các thẻ sản phẩm */
+    display: flex; /* Sử dụng Flexbox để xếp các sản phẩm */
+    justify-content: center; /* Căn giữa sản phẩm theo hàng ngang */
+    flex-wrap: wrap; /* Cho phép sản phẩm tự xuống hàng khi thiếu chỗ */
+    gap: 22px; /* Khoảng cách giữa các thẻ sản phẩm */
+    padding: 0 15px; /* Khoảng trống hai bên */
+    width: 100%; /* Chiếm toàn bộ chiều ngang khung */
+}
+
+.The_San_Pham { /* Khung của mỗi thẻ sản phẩm */
+    border-radius: 16px; /* Bo tròn góc khung */
+    border: 1px solid #D9D9D9; /* Viền xám nhạt tạo khối */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    background: #FFF; /* Màu nền trắng */
+    width: 273px; /* Chiều rộng cố định cho mỗi thẻ */
+    height: 460px; /* Chiều cao cố định */
+    padding: 20px; /* Khoảng trống trong khung */
+    box-sizing: border-box; /* Tính luôn padding vào kích thước tổng */
+    display: flex; /* Sử dụng flex cho bố cục dọc bên trong */
+    flex-direction: column; /* Xếp nội dung theo cột: ảnh – tên – giá */
+    align-items: center; /* Căn giữa nội dung theo chiều ngang */
+}
+
+.The_San_Pham_Luoi { /* Phần bên trong thẻ dùng để chứa ảnh hoặc nội dung con */
+    display: grid; /* Sử dụng layout dạng lưới */
+    justify-items: center; /* Căn giữa các phần tử con trong lưới */
+    flex-grow: 1; /* Cho phép chiếm hết không gian còn lại trong thẻ */
+    gap: 16px; /* Khoảng cách giữa các phần tử con (ảnh hoặc text) */
+}
+
+.TheSanPham_HinhAnh { /* Hình ảnh sản phẩm */
+    width: 232px; /* Chiều rộng cố định của ảnh */
+    height: 232px; /* Chiều cao cố định của ảnh */
+    object-fit: cover; /* Giúp ảnh lấp đầy khung mà không bị méo */
+    cursor: pointer; /* Hiển thị bàn tay khi hover (ảnh có thể click) */
+    border-radius: 4px; /* Bo nhẹ 4px cho ảnh mềm mại hơn */
+    margin-top: 38px; /* Tạo khoảng cách phía trên ảnh */
+}
+
+.TheSanPham_TenThietBi { /* Tên sản phẩm */
+    margin-top: 28px; /* Cách ảnh phía trên */
+    margin-bottom: 19px; /* Cách phần giá phía dưới */
+    font-size: 16px; /* Cỡ chữ vừa phải */
+    text-align: center; /* Căn giữa tên */
+    cursor: pointer; /* Con trỏ dạng bàn tay (click được) */
+    font-family: sans-serif; /* Font chữ đơn giản */
+}
+
+.TheSanPham_Gia { /* Giá sản phẩm */
+    margin: 8px 0 32px 0; /* Trên 8px, dưới 32px */
+    font-size: 18px; /* Chữ lớn hơn để nổi bật */
+    font-weight: 600; /* Đậm vừa phải */
+    color: #FF7506; /* Màu cam để thu hút sự chú ý */
+    font-family: sans-serif; /* Font đơn giản, nhất quán */
+    text-align: center; /* Căn giữa chữ */
+}
+
+/* --- Tổng thể --- */
+body { /* Thiết lập chung cho toàn trang */
+    font-family: Arial, sans-serif; /* Font chữ phổ biến */
+    margin: 0; /* Xóa khoảng trống mặc định */
+    padding: 0; /* Xóa padding mặc định */
+    background-color: #fff; /* Nền trắng cho trang */
+}
+
+a { /* Các thẻ liên kết */
+    text-decoration: none; /* Bỏ gạch chân mặc định */
+    color: #333; /* Màu xám đậm dễ đọc */
+    transition: color 0.3s; /* Hiệu ứng chuyển màu mượt khi hover */
+}
+
+    a:hover { /* Khi rê chuột vào liên kết */
+        color: #000; /* Đổi sang màu đen để nhấn mạnh */
+    }
+
+ul { /* Danh sách (unordered list) */
+    list-style: none; /* Bỏ dấu chấm mặc định */
+    padding: 0; /* Xóa padding mặc định */
+    margin: 0; /* Xóa margin mặc định */
+}

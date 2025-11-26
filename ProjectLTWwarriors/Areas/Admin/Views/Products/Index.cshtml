@@ -1,0 +1,93 @@
+﻿@model ProjectLTWwarriors.Models.ViewModel.ProductSearchVm
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .search-container, .order-container {
+        padding-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+</style>
+
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+@using (Html.BeginForm("Index", "Products", FormMethod.Get, new { area = "Admin" }))
+{
+    <div class="form-group search-container">
+        @Html.TextBoxFor(m => m.SearchTerm, new
+        {
+            @class = "form-control",
+            placeholder = "Nhập tên, mô tả hoặc danh mục sản phẩm",
+            style = "width:250px;"
+        })
+
+        @Html.TextBoxFor(m => m.MinPrice, new
+        {
+            @class = "form-control",
+            placeholder = "Giá tối thiểu",
+            type = "number",
+            style = "width:120px;"
+        })
+
+        @Html.TextBoxFor(m => m.MaxPrice, new
+        {
+            @class = "form-control",
+            placeholder = "Giá tối đa",
+            type = "number",
+            style = "width:120px;"
+        })
+
+        <button type="submit" class="btn btn-dark">Tìm kiếm</button>
+    </div>
+
+    <div class="form-group order-container">
+        Sắp xếp theo:
+        @Html.ActionLink("Tên tăng dần", "Index",
+             new
+                  {
+                 sortOrder = "name_asc",
+                 searchTerm = Model.SearchTerm,
+                 minPrice = Model.MinPrice,
+                 maxPrice = Model.MaxPrice
+             })
+        |
+        @Html.ActionLink("Tên giảm dần", "Index",
+             new
+                  {
+                 sortOrder = "name_desc",
+                 searchTerm = Model.SearchTerm,
+                 minPrice = Model.MinPrice,
+                 maxPrice = Model.MaxPrice
+             })
+        |
+        @Html.ActionLink("Giá tăng dần", "Index",
+             new
+                  {
+                 sortOrder = "price_asc",
+                 searchTerm = Model.SearchTerm,
+                 minPrice = Model.MinPrice,
+                 maxPrice = Model.MaxPrice
+             })
+        |
+        @Html.ActionLink("Giá giảm dần", "Index",
+             new
+                  {
+                 sortOrder = "price_desc",
+                 searchTerm = Model.SearchTerm,
+                 minPrice = Model.MinPrice,
+                 maxPrice = Model.MaxPrice
+             })
+    </div>
+}
+
+@Html.Partial("PVListProduct", Model)

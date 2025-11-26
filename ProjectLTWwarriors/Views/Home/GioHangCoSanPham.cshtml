@@ -1,0 +1,265 @@
+﻿
+@model List<ProjectLTWwarriors.Models.MatHangTrongGio>
+@{
+    ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var tongSoLuong = Model.Sum(item => item.SoLuong);
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GioHangCoSanPham</title>
+    <link href="~/Content/GioHangCoSanPham.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <div class="trang-gio-hang-day-du">
+            <h1 class="tieu-de-trang">Giỏ hàng (@tongSoLuong)</h1>
+            <div class="khung-chinh">
+                <div class="cot-trai">
+                    @foreach (var item in Model)
+                    {
+                        <div class="san-pham-trong-gio">
+                            @{
+                                // Lấy đường dẫn hình đã được map trong HomeController (ImageUrl)
+                                var hinhAnh = item.SanPham.ImageUrl;
+                            }
+
+                            @if (!string.IsNullOrEmpty(hinhAnh))
+                            {
+                                <img class="anh-san-pham"
+                                     src="@Url.Content(hinhAnh)"
+                                     alt="@item.SanPham.Name"
+                                     style="width:80px;height:80px;object-fit:cover;" />
+                            }
+                            else
+                            {
+                                <span>Không có hình</span>
+                            }
+
+                            <div class="thong-tin-san-pham">
+                                <h2 class="ten-san-pham">@item.SanPham.Name</h2>
+                            </div>
+                            @*<span class="gia-tien">@string.Format("{0:N0}đ", item.SanPham.Price)</span>*@
+
+                            <span class="gia-tien" data-gia="@item.SanPham.Price">
+                                @string.Format("{0:N0}đ", item.SanPham.Price)
+                            </span>
+
+
+                            @*<div class="bo-chon-so-luong">
+            <button class="nut-so-luong">-</button>
+            <input type="text" value="@item.SoLuong" class="so-luong-hien-tai" readonly>
+            <button class="nut-so-luong">+</button>
+        </div>*@
+
+                            <div class="bo-chon-so-luong">
+                                <button class="nut-so-luong nut-giam-so-luong" data-masp="@item.SanPham.Id">-</button>
+                                <input type="text" value="@item.SoLuong" class="so-luong-hien-tai" readonly>
+                                <button class=" nut-so-luong nut-tang-so-luong" data-masp="@item.SanPham.Id">+</button>
+                            </div>
+
+
+
+
+                        </div>
+                    }
+                </div>
+
+                <div class="cot-phai">
+                    @{
+                        decimal tongTienHang = Model.Sum(item => item.SanPham.Price * item.SoLuong);
+                        decimal giamGia = 0;
+                        decimal khuyenMai = 0;
+                        decimal tongCong = tongTienHang - giamGia + khuyenMai;
+                    }
+                    @*<div class="hop-dangky">
+                            <form class="form_dang_ky">
+                                <div class="Mo_ta">Thông tin khách hàng</div>
+                                <div class="hang-input">
+                                    <input type="text" placeholder="Họ và tên" class="o-nhap" />
+
+
+                                </div>
+                                <div class="hang-input">
+
+                                    <input type="text" placeholder="Số điện thoại" class="o-nhap" />
+
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="hop-dangky">
+                            <form class="form_dang_ky">
+                                <div class="Mo_ta">Địa chỉ nhận hàng</div>
+                                <div class="hang-input ">
+                                    <input type="text" placeholder="Tỉnh/Thànhphố" class="o-nhap" />
+
+                                </div>
+                                <div class="hang-input ">
+
+                                    <input type="text" placeholder="Phường/xã" class="o-nhap" />
+                                </div>
+                                <div class="hang-input single">
+                                    <input type="text" placeholder="Số nhà, tên đường" class="o-nhap" />
+                                </div>
+                                <div class="hang-input single">
+                                    <input type="text" placeholder="Nhập ghi chú (nếu có)" class="o-nhap" />
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="hop-dangky">
+                            <form class="form_dang_ky">
+                                <div class="Mo_ta">Phương thức thanh toán</div>
+                                <div class="hang-input single">
+                                    <input type="button" value="Thanh toán khi nhận hàng" class="o-nhap" />
+                                </div>
+                                <div class="hang-input single">
+                                    <input type="button" value="Ví điện tử Momo" class="o-nhap" />
+                                </div>
+                            </form>
+                        </div>*@
+
+                    @*<div class="hop-dangky">
+                        <form class="form_dang_ky">
+                            <div class="Mo_ta">Mã khuyến mãi</div>
+                            <div class="hang-input single">
+                                <input type="text" placeholder="Nhập mã khuyến mãi" class="o-nhap" />
+                            </div>
+                        </form>
+                    </div>*@
+
+
+                    <div class="hop-dangky">
+                        <div class="tom-tat-don-hang">
+                            <div class="dong-tom-tat">
+                                <span>Tổng tiền hàng</span>
+                                <span class="tong-tien-hang">@string.Format("{0:N0}đ", tongTienHang)</span>
+                            </div>
+
+
+
+
+
+
+
+                            @*<div class="dong-tom-tat">
+                                <span>Khuyến mãi</span>
+                                <span>@string.Format("{0:N0}đ", khuyenMai)</span>
+                            </div>*@
+
+                            <div class="dong-tom-tat tong-cong">
+                                <span>Tổng cộng</span>
+                                <span class="tong-cong-tien">@string.Format("{0:N0}đ", tongCong)</span>
+                            </div>
+                        </div>
+
+                        <a href="/Home/ThanhToan" class="nut-thanh-toan">Tiến hành thanh toán</a>
+
+
+                       
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    @*Cập nhật script giúp cho sản phẩm có thể chạy ổn hơn mượt mà web*@
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Hàm cập nhật lại tổng tiền mà không cần reload
+            function capNhatTongTien() {
+                let tongTien = 0;
+                $(".san-pham-trong-gio").each(function () {
+                    const gia = parseFloat($(this).find(".gia-tien").data("gia"));
+                    const soLuong = parseInt($(this).find(".so-luong-hien-tai").val());
+                    tongTien += gia * soLuong;
+                });
+
+                // Hiển thị tổng tiền và tổng cộng
+                $(".tong-tien-hang").text(tongTien.toLocaleString('vi-VN') + "đ");
+                $(".tong-cong-tien").text(tongTien.toLocaleString('vi-VN') + "đ");
+            }
+
+            //Hàm Cập nhật icon giỏ hàng trên header
+            function capNhatSoLuongGioHang() {
+                var tong = 0;
+                $(".so-luong-hien-tai").each(function () {
+                    var v = parseInt($(this).val(), 10);
+                    if (!isNaN(v)) tong += v;
+                });
+
+                var $badge = $("#cart-count");
+                if ($badge.length) {
+                    $badge.text(tong);
+                }
+            }
+
+            // Gọi 1 lần khi trang load để chắc chắn icon đúng
+            capNhatSoLuongGioHang();
+
+            // Khi bấm nút "+"
+            $(".nut-tang-so-luong").click(function () {
+                var nut = $(this);
+                var maSP = nut.data("masp");
+                $.post("/Home/TangSoLuong", { maSP: maSP }, function (res) {
+                    if (res.success) {
+                        var input = nut.siblings(".so-luong-hien-tai");
+                        var soLuongMoi = parseInt(input.val()) + 1;
+                        input.val(soLuongMoi);
+                        capNhatTongTien(); // Cập nhật tổng tiền
+                        capNhatSoLuongGioHang();   // cập nhật icon giỏ hàng
+                    }
+                });
+            });
+
+            // Khi bấm nút "–"
+            $(".nut-giam-so-luong").click(function () {
+                var nut = $(this);
+                var maSP = nut.data("masp");
+                $.post("/Home/GiamSoLuong", { maSP: maSP }, function (res) {
+                    if (!res || !res.success) return;
+
+                    var input = nut.siblings(".so-luong-hien-tai");
+                    var soLuongMoi = parseInt(input.val(), 10) - 1;
+
+                    if (soLuongMoi <= 0) {
+                        // 1 -> bấm "-" => xóa dòng
+                        nut.closest(".san-pham-trong-gio").remove();
+                    } else {
+                        input.val(soLuongMoi); // 3 -> 2 ...
+                    }
+
+                    // Cập nhật tổng tiền (giữ đúng hàm bạn đang dùng)
+                    capNhatTongTien();
+                    capNhatSoLuongGioHang();  // cập nhật icon giỏ hàng
+
+                    // Chuyển sang trang giỏ trống khi không còn item
+                    // Ưu tiên dùng cờ server, nếu không có thì fallback đếm DOM
+                    var hetHangTheoServer = (res.empty === true);
+                    var hetHangTheoDOM = ($(".san-pham-trong-gio").length === 0);
+
+                    if (hetHangTheoServer || hetHangTheoDOM) {
+                        window.location.href = "/Home/XemGioHang";
+                        return;
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</body>
+
+
+
+
+
+</html>

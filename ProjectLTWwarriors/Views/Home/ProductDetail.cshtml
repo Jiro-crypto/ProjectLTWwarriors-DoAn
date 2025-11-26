@@ -1,0 +1,192 @@
+﻿@model ProjectLTWwarriors.Models.Product
+
+@{
+    ViewBag.Title = "Sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Product.css" rel="stylesheet" />
+
+@{
+    // Chuẩn bị danh sách ảnh để hiển thị
+    var dsAnh = Model.ImageUrls ?? new List<string>();
+    string anhChinh = null;
+
+    if (dsAnh.Any())
+    {
+        // Nếu có list ImageUrls thì lấy tấm đầu
+        anhChinh = dsAnh.FirstOrDefault();
+    }
+    else if (!string.IsNullOrEmpty(Model.ImageUrl))
+    {
+        // Nếu không có list nhưng có ImageUrl đơn lẻ thì dùng nó
+        dsAnh = new List<string> { Model.ImageUrl };
+        anhChinh = Model.ImageUrl;
+    }
+}
+
+<div class="khung-trang-san-pham">
+    <div class="khu-vuc-anh">
+
+        <div class="khung-anh-chinh">
+            @if (!string.IsNullOrEmpty(anhChinh))
+            {
+                <img id="anhChinhSanPham" src="@Url.Content(anhChinh)" alt="@Model.Name" />
+            }
+            else
+            {
+                <img id="anhChinhSanPham" src="~/Content/no-image.png" alt="Không có hình" />
+            }
+        </div>
+
+        <div class="danh-sach-anh-nho">
+            @if (dsAnh.Any())
+            {
+                foreach (var duongDanAnh in dsAnh)
+                {
+                    <div class="khung-anh-nho">
+                        <img class="anh-nho" src="@Url.Content(duongDanAnh)" alt="Ảnh nhỏ" />
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="thong-tin-chi-tiet">
+        <h1 class="ten-san-pham">@Model.Name</h1>
+        <p class="gia-san-pham">@string.Format("{0:N0}đ", Model.Price)</p>
+
+        @{
+            // Lọc dung lượng: bỏ các phần tử là "X"
+            var storageOptions = (Model.Storage ?? new List<string>())
+                                 .Where(s => !string.Equals(s, "X", StringComparison.OrdinalIgnoreCase))
+                                 .ToList();
+        }
+
+        @* Chỉ hiện block dung lượng nếu thực sự có lựa chọn *@
+        @if (storageOptions.Any())
+        {
+            <div class="khu-vuc-tuy-chon">
+                <label class="nhan-tuy-chon">Dung lượng</label>
+                <div class="cac-nut-tuy-chon">
+                    @foreach (var dungLuong in storageOptions)
+                    {
+                        <button class="nut-tuy-chon">@dungLuong</button>
+                    }
+                </div>
+            </div>
+        }
+
+        @*<div class="khu-vuc-tuy-chon">
+            <label class="nhan-tuy-chon">Màu</label>
+            <div class="cac-nut-tuy-chon">
+                @if (Model.Colors != null)
+                {
+                    foreach (var mauSac in Model.Colors)
+                    {
+                        <button class="o-mau" style="background-color: @mauSac;"></button>
+                    }
+                }
+            </div>
+        </div>*@
+
+        <div class="bo-chon-so-luong">
+            <label class="nhan-tuy-chon">Số lượng</label>
+            <div class="khung-nhap-so-luong">
+                <button class="nut-so-luong">-</button>
+                <input type="text" value="1" id="soLuongMua" />
+                <button class="nut-so-luong">+</button>
+            </div>
+        </div>
+
+        <div class="cac-nut-hanh-dong">
+            @* Nút này dùng script chung ở _Layout: bắt [data-add-to-cart] *@
+            <button class="nut nut-them-gio-hang"
+                    data-add-to-cart
+                    data-masp="@Model.Id"
+                    data-qty="1">
+                Thêm vào giỏ hàng
+            </button>
+        </div>
+
+        <div class="cac-nut-hanh-dong">
+            @* Nút Mua ngay: mình xử lý riêng trong view này *@
+            <button class="nut nut-mua-ngay" data-maso="@Model.Id">Mua ngay</button>
+        </div>
+
+        <div class="khuyen-mai">
+           <p>@Model.Description</p>
+            <h5>Khuyến mãi</h5>
+            <ul>
+                
+                <li>PMH PK bảo vệ iPhone 17 (trừ Apple, Beats, đơn trên 500,000đ) trị giá 150,000đ</li>
+                <li>PMH Loa, Tai nghe JBL, Harman Alpha Works, S&M, Macalioo trị giá 200,000đ</li>
+                <li>Phiếu mua hàng Airpods, Apple Watch, Macbook trị giá 500,000đ</li>
+                <li>Thu cũ đổi mới: Giảm đến 3,000,000đ (Không kèm ưu đãi thanh toán qua cổng, mua kèm).</li>
+                <li>Gói dịch vụ bảo hành mở rộng, bảo hành rơi vỡ chỉ từ 990,000đ.</li>
+                
+            </ul>
+        </div>
+
+        <div class="khuyen-mai">
+            <ul>
+                <li>Hư gì đổi nấy 12 tháng tại 3049 siêu thị trên toàn quốc</li>
+                <li>Bảo hành chính hãng 1 năm</li>
+                <li>Giao hàng nhanh toàn quốc</li>
+                <li>Tổng đài: 1900.9696.42 (8:00 - 21:30)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+            // ===== NÚT CỘNG / TRỪ SỐ LƯỢNG =====
+            $('.nut-so-luong').on('click', function () {
+                var input = $('#soLuongMua');
+                var currentValue = parseInt(input.val(), 10) || 1;
+
+                if ($(this).text().trim() === '+') {
+                    input.val(currentValue + 1);
+                } else {
+                    if (currentValue > 1) {
+                        input.val(currentValue - 1);
+                    }
+                }
+            });
+
+            // ===== NÚT MUA NGAY =====
+            $('.nut-mua-ngay').on('click', function (e) {
+                e.preventDefault();
+
+                var maSanPham = $(this).data('maso');
+                var soLuong = parseInt($('#soLuongMua').val(), 10);
+                if (isNaN(soLuong) || soLuong <= 0) {
+                    soLuong = 1;
+                }
+
+                $.ajax({
+                    url: '/Home/ThemVaoGio',
+                    type: 'POST',
+                    data: {
+                        maSP: maSanPham,
+                        soLuong: soLuong
+                    },
+                    success: function (response) {
+                        if (response && response.success) {
+                            // Sau khi thêm thành công thì chuyển sang trang giỏ hàng
+                            window.location.href = '/Home/XemGioHang';
+                        } else {
+                            alert((response && response.message) || "Không thể thêm sản phẩm vào giỏ hàng!");
+                        }
+                    },
+                    error: function () {
+                        alert("Có lỗi xảy ra khi thêm sản phẩm!");
+                    }
+                });
+            });
+
+        });
+    </script>
+}

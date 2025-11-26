@@ -1,0 +1,77 @@
+﻿/* Thiết lập font chữ và reset cơ bản */
+body {
+    font-family: 'Inter', sans-serif; /* Dùng font Inter đã import */
+    margin: 0;
+    padding: 0;
+    background-color: #f9fafb; /* Màu nền xám nhạt */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Căn giữa toàn bộ trang */
+}
+
+/* Khung chứa nội dung chính */
+.welcome-container {
+    display: flex;
+    flex-direction: column; /* Xếp các phần tử theo chiều dọc */
+    align-items: center; /* Căn giữa theo chiều ngang */
+    text-align: center;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 16px; /* Bo góc */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Đổ bóng nhẹ */
+    max-width: 350px;
+    width: 90%;
+}
+
+/* Tiêu đề "Chào mừng..." */
+.welcome-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827; /* Màu đen nhạt */
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+/* Icon người dùng */
+.user-icon {
+    margin-bottom: 20px;
+    /* Thay đổi màu viền của icon */
+    stroke: #6B7280; /* Màu xám */
+}
+
+/* Email người dùng */
+.user-email {
+    font-size: 16px;
+    font-weight: 500;
+    color: #111827; /* Màu đen nhạt */
+    margin-bottom: 12px;
+}
+
+/* Phụ đề "Yeahh!..." */
+.welcome-subtitle {
+    font-size: 14px;
+    color: #6B7280; /* Màu xám */
+    line-height: 1.5; /* Giãn dòng */
+    margin-bottom: 32px;
+}
+
+/* Nút "Hoàn tất" */
+.complete-button {
+    display: inline-block;
+    width: 100%; /* Nút chiếm toàn bộ chiều rộng */
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff; /* Chữ màu trắng */
+    background-color: #F8B4B4; /* Màu hồng nhạt như trong ảnh */
+    border: none;
+    border-radius: 999px; /* Bo tròn thành hình con nhộng */
+    text-decoration: none; /* Bỏ gạch chân của thẻ <a> */
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+    .complete-button:hover {
+        background-color: #F6A3A3; /* Màu đậm hơn khi hover */
+    }

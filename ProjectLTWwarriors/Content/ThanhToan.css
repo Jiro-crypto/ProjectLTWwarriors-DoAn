@@ -1,0 +1,197 @@
+﻿/* ====== PHONG CÁCH CHUNG CHO TRANG ====== */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.tt-page-wrapper {
+    max-width: 1200px;
+    margin: 0 auto; /* căn giữa toàn trang */
+    background-color: white;
+    min-height: 100vh; /* chiếm toàn chiều cao trình duyệt */
+    /*box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;*/
+    padding: 24px 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+/* ====== KHUNG TỔNG TRANG THANH TOÁN ====== */
+.tt-trang-thanh-toan {
+    max-width: 1100px; /* Giới hạn chiều rộng tối đa */
+    margin: 40px auto; /* Canh giữa trang với khoảng cách trên dưới */
+    color: #333; /* Màu chữ cơ bản */
+}
+
+/* ====== KHUNG CHỨA THÔNG TIN THANH TOÁN ====== */
+.tt-khung-thong-tin {
+    display: flex; /* Sắp xếp hai cột cạnh nhau */
+    justify-content: space-between; /* Cách đều hai bên */
+    background: #fff3f2; /* Màu nền hồng rất nhạt */
+    border-radius: 12px; /* Bo góc mềm mại */
+    padding: 30px; /* Khoảng cách trong */
+    border: 1px solid #f1dede; /* Viền mảnh, màu hồng nhạt */
+    gap: 40px; /* Khoảng cách giữa hai cột */
+}
+
+/* ====== CỘT TRÁI VÀ CỘT PHẢI ====== */
+.tt-cot-trai, .tt-cot-phai {
+    flex: 1; /* Hai cột chia đều không gian */
+}
+
+    .tt-cot-trai h3, .tt-cot-phai h3 {
+        font-weight: 600; /* Chữ đậm vừa */
+        margin-bottom: 12px; /* Cách tiêu đề và nội dung bên dưới */
+    }
+
+/* ====== Ô NHẬP THÔNG TIN ====== */
+.tt-o-nhap {
+    width: 100%; /* Chiếm toàn bộ chiều ngang */
+    padding: 10px; /* Khoảng cách trong */
+    border: 1px solid #e5caca; /* Viền nhẹ, màu hồng nhạt */
+    border-radius: 16px; /* Bo góc nhẹ */
+    margin-bottom: 10px; /* Khoảng cách giữa các ô nhập */
+    background-color: #fff; /* Nền trắng nổi bật */
+}
+
+    /* Hiệu ứng khi người dùng click vào ô nhập */
+    .tt-o-nhap:focus {
+        outline: none; /* Ẩn viền mặc định của trình duyệt */
+        border-color: #ffb2a8; /* Đổi màu viền khi focus */
+        box-shadow: 0 0 4px rgba(255, 142, 130, 0.4); /* Tạo ánh sáng hồng nhẹ xung quanh */
+    }
+
+/* ====== CÁC NÚT HÀNH ĐỘNG (Lưu, Xóa) ====== */
+.tt-nut-hanh-dong {
+    display: flex; /* Đặt 2 nút cạnh nhau */
+    gap: 20px; /* Khoảng cách giữa các nút */
+    width: 100px
+}
+
+.tt-nut-luu, .tt-nut-xoa {
+    flex: 1; /* Hai nút chiếm đều không gian */
+    padding: 10px; /* Khoảng đệm trong */
+    border-radius: 8px; /* Bo góc nhẹ */
+    border: none; /* Bỏ viền mặc định */
+    cursor: pointer; /* Hiển thị con trỏ dạng tay */
+}
+
+/* Nút lưu có màu nổi bật */
+.tt-nut-luu {
+    background-color: #ffb7b7; /* Màu hồng pastel */
+    color: white; /* Chữ trắng */
+}
+
+/* Nút xóa có màu xám nhạt */
+.tt-nut-xoa {
+    background-color: #f3dada; /* Hồng rất nhạt */
+    color: #555; /* Chữ xám đậm hơn để dễ đọc */
+}
+
+/* ====== PHƯƠNG THỨC THANH TOÁN ====== */
+.tt-phuong-thuc {
+    display: flex;
+    flex-direction: column; /* Sắp xếp dọc các lựa chọn */
+    gap: 8px; /* Khoảng cách giữa các phương thức */
+}
+
+.tt-nut-pttt {
+    border: 1px solid #e7b9b9; /* Viền hồng nhạt */
+    background-color: #fff; /* Nền trắng */
+    border-radius: 16px; /* Bo góc nhẹ */
+    padding: 10px; /* Khoảng cách trong */
+    cursor: pointer; /* Hiển thị con trỏ dạng tay khi hover */
+}
+
+/* Nút phương thức bị vô hiệu hóa (xám đi) */
+.tt-nut-xam {
+    color: #bbb; /* Chữ xám nhạt để thể hiện trạng thái không hoạt động */
+}
+
+/* ====== Ô NHẬP VOUCHER ====== */
+.tt-voucher {
+    display: flex; /*Đặt ô nhập và nút áp dụng cạnh nhau */
+
+    gap: 8px; /* Khoảng cách giữa hai phần */
+}
+
+.tt-nut-ap-dung {
+    background-color: #ffb7b7; /* Nền hồng nhạt */
+    color: white; /* Chữ trắng */
+    border: none; /* Không viền */
+    border-radius: 8px; /* Bo góc nhẹ */
+    padding: 10px 16px; /* Khoảng cách trong đều */
+    cursor: pointer; /* Con trỏ dạng tay khi rê chuột */
+}
+
+/* ====== BẢNG SẢN PHẨM ====== */
+.tt-bang-san-pham {
+    background: #fff3f2; /* Nền hồng rất nhạt */
+    border: 1px solid #f1dede; /* Viền nhẹ */
+    border-radius: 12px; /* Bo góc mềm */
+    margin-top: 20px; /* Cách phần trên */
+    padding: 20px; /* Khoảng cách trong */
+    margin-bottom: 40px;
+}
+
+/* ====== ĐỊNH DẠNG BẢNG ====== */
+.tt-table {
+    width: 100%; /* Chiếm hết chiều ngang khung */
+    border-collapse: collapse; /* Gộp viền để hiển thị liền mạch */
+    margin-bottom: 20px; /* Cách phần dưới */
+}
+
+.tt-th, .tt-td {
+    text-align: left; /* Căn trái nội dung */
+    padding: 12px; /* Khoảng cách trong mỗi ô */
+}
+
+.tt-th {
+    font-weight: 600; /* Tiêu đề bảng đậm hơn */
+    border-bottom: 2px solid #f1dede; /* Gạch phân cách dưới dòng tiêu đề */
+}
+
+/* ====== PHẦN TỔNG KẾT GIÁ ====== */
+.tt-tong-ket {
+    border: 1px solid #f1dede; /* Viền nhẹ */
+    border-radius: 12px; /* Bo góc */
+    padding: 16px; /* Khoảng cách trong */
+    background: #fff; /* Nền trắng */
+    width: 280px; /* Chiều rộng cố định */
+    float: right; /* Canh sang bên phải bảng sản phẩm */
+    margin-top: 10px;
+}
+
+/* Mỗi dòng trong phần tổng tiền */
+.tt-dong-tien {
+    display: flex;
+    justify-content: space-between; /* Giá trị và nhãn ở hai đầu */
+    margin-bottom: 8px; /* Khoảng cách giữa các dòng */
+}
+
+/* Dòng tổng cộng */
+.tt-tong-cong {
+    font-size: 18px; /* Chữ to hơn */
+    font-weight: bold; /* Chữ đậm */
+    margin-top: 10px; /* Cách phần trên một chút */
+}
+
+/* ====== NÚT ĐẶT HÀNG ====== */
+.tt-nut-dat-hang {
+    background-color: #ffb7b7; /* Màu nền hồng pastel */
+    border: none; /* Bỏ viền */
+    color: white; /* Chữ trắng */
+    border-radius: 8px; /* Bo góc nhẹ */
+    padding: 12px; /* Khoảng đệm trong */
+    width: 100%; /* Chiều ngang toàn khung tổng kết */
+    margin-top: 12px; /* Cách phần trên */
+    cursor: pointer; /* Hiển thị con trỏ tay */
+    text-decoration: none;
+}
+
+    /* Hiệu ứng khi rê chuột lên nút đặt hàng */
+    .tt-nut-dat-hang:hover {
+        background-color: #ff8c8c; /* Đổi sang màu hồng đậm hơn khi hover */
+    }

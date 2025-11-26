@@ -1,0 +1,143 @@
+﻿@using ProjectLTWwarriors.Models
+
+@{
+    // Lấy user đang đăng nhập từ Session
+    var currentUser = Session["CurrentUser"] as Users;
+}
+
+<link href="~/Content/Header.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+<header class="header-wrapper">
+    <div class="Header">
+        <a href="/Home/LandingPage" class="Logo">LTWarriors</a>
+
+        <div class="menu-icon" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <nav class="Nav">
+            <ul>
+                <li><a href="/Home/iPhone" class="NavText">iPhone</a></li>
+                <li><a href="/Home/Mac" class="NavText">Mac</a></li>
+                <li><a href="/Home/iPad" class="NavText">iPad</a></li>
+                <li><a href="/Home/Watch" class="NavText">Watch</a></li>
+                <li><a href="/Home/TaiNghe_Loa" class="NavText">Tai nghe, Loa</a></li>
+                <li><a href="/Home/PhuKien" class="NavText">Phụ kiện</a></li>
+            </ul>
+        </nav>
+
+        <div class="Search">
+            @using (Html.BeginForm("LandingPage", "Home", FormMethod.Get))
+            {
+                <i class="fa-solid fa-magnifying-glass SearchIcon"></i>
+                <input type="text"
+                       name="searchTerm"
+                       placeholder="Tìm kiếm sản phẩm..."
+                       class="search-input" />
+            }
+        </div>
+
+        <!-- GIỎ HÀNG -->
+        <div class="gio-hang">
+            <a href="@Url.Action("XemGioHang","Home")" class="nav-link">
+                <i class="fas fa-shopping-cart cart-icon"></i>
+                <span id="cart-count" class="badge bg-danger">0</span>
+            </a>
+        </div>
+
+        <div class="lich-su">
+            <a href="@Url.Action("LichSuMuaHang","Home")">
+                <i class="fa fa-calendar cart-icon" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <!-- USER / LOGIN -->
+        @if (currentUser != null)
+        {
+            <div class="user-box">
+                <i class="fa-regular fa-circle-user cart-icon"></i>
+                <span class="user-name">@currentUser.FullName</span>
+                <a href="@Url.Action("Logout", "Home")" class="logout-link">Đăng xuất</a>
+            </div>
+        }
+        else
+        {
+            <div>
+                <a href="@Url.Action("SignIn","Home")">
+                    <i class="fa-regular fa-circle-user cart-icon"></i>
+                </a>
+            </div>
+        }
+    </div>
+
+    <style>
+        .Header {
+            display: flex;
+            justify-content: space-between; /* Chia không gian giữa các phần tử */
+            align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+            padding: 10px;
+            gap: 20px; /* Khoảng cách giữa các phần tử trong Header */
+        }
+
+        .Nav {
+            display: flex;
+            gap: 20px; /* Khoảng cách giữa các mục menu */
+            flex-grow: 1;
+        }
+
+        .search-input {
+            margin-left: 10px;
+        }
+
+        .gio-hang, .user-box {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Khoảng cách giữa các phần tử trong giỏ hàng và người dùng */
+        }
+
+        .badge {
+            display: inline-block;
+            min-width: 20px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            background: #dc3545;
+            color: #fff;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .user-name {
+            font-weight: 500;
+        }
+
+        .logout-link {
+            color: #f97316;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+            .logout-link:hover {
+                text-decoration: underline;
+            }
+
+        .search-input {
+            border: none;
+            outline: none;
+            padding-left: 8px;
+            font-size: 14px;
+            width: 350px;
+            background: transparent;
+        }
+    </style>
+
+</header>
+
+<script>
+    function toggleMenu() {
+        var ul = document.querySelector('.Nav ul');
+        if (ul) {
+            ul.classList.toggle('show');
+        }
+    }
+</script>

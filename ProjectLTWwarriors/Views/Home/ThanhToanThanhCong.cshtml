@@ -1,0 +1,52 @@
+﻿@model ProjectLTWwarriors.Models.Orders
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ThanhToanThanhCong</title>
+    <link href="~/Content/ThanhToanThanhCong.css" rel="stylesheet" />
+    <link rel="preconnect" href="https.googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body>
+    <div class="welcome-container">
+
+        <h2 class="welcome-title">
+            Chúc mừng bạn đã thanh toán đơn hàng thành công!
+        </h2>
+
+        <i class="fa-solid fa-circle-check user-icon"></i>
+
+        <div class="user-email">
+            Mã đơn hàng của bạn: <strong>@Model.MaDon</strong>
+        </div>
+
+        <p class="welcome-subtitle">
+            Đơn hàng đã được ghi nhận. Chúng tôi sẽ liên hệ sớm nhất!
+        </p>
+
+        <a class="complete-button"
+           href="@Url.Action("ChiTietDonHang", "Home", new { id = Model.MaDon })">
+           Xem chi tiết đơn hàng
+        </a>
+
+        <a class="complete-button" style="margin-top:10px;"
+           href="@Url.Action("LichSuMuaHang", "Home")">
+            Xem lịch sử mua hàng
+        </a>
+
+        <a class="complete-button" style="margin-top:10px; background:#777"
+           href="@Url.Action("LandingPage", "Home")">
+            Quay lại trang chủ
+        </a>
+    </div>
+</body>
+</html>

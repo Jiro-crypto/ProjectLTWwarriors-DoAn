@@ -1,0 +1,209 @@
+﻿/* --- RESET MẶC ĐỊNH --- */
+body {
+    margin: 0; /* Xóa khoảng trống mặc định của body */
+    padding: 0; /* Xóa đệm mặc định của body */
+    display: flex;
+    flex-direction: column; /* Xếp các con (header, main, footer) theo chiều dọc */
+    min-height: 100vh; /* Đảm bảo body cao ít nhất bằng màn hình */
+}
+
+/* --- KHUNG TỔNG TRANG SẢN PHẨM --- */
+.khung-trang-san-pham {
+    display: flex; /* Chia bố cục thành 2 cột (ảnh + thông tin) */
+    max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+    margin: 40px auto; /* Căn giữa trang và cách trên dưới 40px */
+    gap: 50px; /* Khoảng cách giữa hai cột */
+    font-family: Arial, sans-serif; /* Font chữ chung cho trang */
+    color: #333; /* Màu chữ chính */
+    
+}
+
+/* --- CỘT TRÁI: HÌNH ẢNH SẢN PHẨM --- */
+.khu-vuc-anh {
+    flex: 1; /* Cột trái chiếm 1 phần không gian trong flex */
+}
+
+.khung-anh-chinh img {
+    width: 100%; /* Ảnh chính hiển thị toàn khung */
+    /*border-radius: 16px;*/ /* Bo góc ảnh nếu bật */
+    /*border: 1px solid #eee;*/ /* Viền mờ quanh ảnh (tùy chọn) */
+}
+
+/* --- DANH SÁCH ẢNH NHỎ PHỤ --- */
+.danh-sach-anh-nho {
+    display: flex; /* Sắp xếp ảnh nhỏ theo hàng ngang */
+    justify-content: center; /* Căn giữa ảnh nhỏ */
+    gap: 15px; /* Khoảng cách giữa các ảnh nhỏ */
+    margin-top: 20px; /* Cách ảnh chính 20px */
+}
+
+.khung-anh-nho {
+    padding: 3px; /* Khoảng đệm bên trong khung ảnh nhỏ */
+    border: 2px solid transparent; /* Viền trong suốt mặc định */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 10px; /* Bo góc khung */
+    cursor: pointer; /* Con trỏ dạng tay khi di chuột vào */
+    transition: border-color 0.2s; /* Hiệu ứng đổi màu viền mượt */
+}
+
+    .khung-anh-nho:hover {
+        border-color: #007bff; /* Viền xanh khi di chuột vào */
+    }
+
+    .khung-anh-nho.dang-chon {
+        border-color: #007bff; /* Giữ viền xanh khi ảnh đang được chọn */
+    }
+
+.anh-nho {
+    width: 70px; /* Chiều rộng ảnh nhỏ */
+    height: 70px; /* Chiều cao ảnh nhỏ */
+    object-fit: cover; /* Giữ tỉ lệ ảnh, cắt phần dư */
+    border-radius: 8px; /* Bo góc ảnh nhỏ */
+}
+
+/* --- CỘT PHẢI: THÔNG TIN SẢN PHẨM --- */
+.thong-tin-chi-tiet {
+    flex: 1; /* Cột phải chiếm 1 phần không gian */
+    border: 1px solid #BFC0C0; /* Viền xám nhạt bao quanh */
+    border-radius: 16px; /* Bo tròn góc khung */
+    padding: 25px 25px; /* Khoảng cách trong khung */
+    margin-bottom: 20px; /* Cách phần dưới */
+}
+
+/* --- TÊN & GIÁ SẢN PHẨM --- */
+.ten-san-pham {
+    font-size: 28px; /* Cỡ chữ lớn cho tiêu đề */
+    font-weight: 600; /* Đậm vừa */
+    margin-top: 0; /* Xóa khoảng cách trên cùng */
+}
+
+.gia-san-pham {
+    font-size: 32px; /* Cỡ chữ lớn cho giá */
+    font-weight: bold; /* Đậm hơn để nổi bật */
+    color: black; /* Màu đen rõ ràng */
+    margin: 10px 0 20px; /* Cách trên 10px, dưới 20px */
+}
+
+/* --- KHU VỰC TÙY CHỌN (size, màu,...) --- */
+.khu-vuc-tuy-chon {
+    margin-bottom: 20px; /* Cách phần kế tiếp 20px */
+}
+
+.nhan-tuy-chon {
+    font-weight: 600; /* Chữ đậm cho nhãn */
+    margin-bottom: 8px; /* Cách phần dưới 8px */
+    display: block; /* Hiển thị riêng 1 dòng */
+}
+
+.cac-nut-tuy-chon {
+    display: flex; /* Xếp các tùy chọn theo hàng ngang */
+    gap: 10px; /* Khoảng cách giữa các nút */
+    align-items: center; /* Căn giữa theo trục dọc */
+}
+
+.nut-tuy-chon {
+    padding: 8px 16px; /* Khoảng đệm trong nút */
+    border: 1px solid #ccc; /* Viền xám nhạt */
+    border-radius: 8px; /* Bo góc nút */
+    background-color: #fff; /* Nền trắng */
+    cursor: pointer; /* Con trỏ tay */
+    font-size: 14px; /* Cỡ chữ nhỏ vừa */
+}
+
+    .nut-tuy-chon.dang-chon {
+        border-color: #d70018; /* Viền đỏ khi được chọn */
+        color: #d70018; /* Chữ đỏ khi chọn */
+        font-weight: bold; /* In đậm khi chọn */
+    }
+
+/* --- Ô MÀU (nếu sản phẩm có nhiều màu sắc) --- */
+.o-mau {
+    width: 32px; /* Chiều rộng ô tròn màu */
+    height: 32px; /* Chiều cao ô tròn màu */
+    border-radius: 50%; /* Bo tròn thành hình tròn */
+    border: 2px solid #eee; /* Viền xám nhạt */
+    cursor: pointer; /* Con trỏ tay */
+}
+
+    .o-mau:hover {
+        border-color: #999; /* Viền đậm hơn khi hover */
+    }
+
+/* --- CHỌN SỐ LƯỢNG --- */
+.bo-chon-so-luong {
+    margin-bottom: 25px; /* Cách phần tiếp theo 25px */
+}
+
+.khung-nhap-so-luong {
+    display: flex; /* Xếp các phần tử (+, input, -) ngang hàng */
+    border: 1px solid #ccc; /* Viền mảnh xung quanh */
+    border-radius: 12px; /* Bo góc nhẹ */
+    width: 120px; /* Chiều rộng toàn khung */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+    .khung-nhap-so-luong input {
+        width: 50px; /* Chiều rộng ô nhập số */
+        text-align: center; /* Căn giữa số bên trong */
+        border: none; /* Bỏ viền */
+        font-size: 16px; /* Cỡ chữ vừa phải */
+    }
+
+.nut-so-luong {
+    border: none; /* Bỏ viền */
+    background: none; /* Nền trong suốt */
+    font-size: 20px; /* Cỡ chữ lớn cho dấu +/- */
+    padding: 8px 15px; /* Khoảng đệm trong nút */
+    cursor: pointer; /* Trỏ chuột tay */
+    color: #555; /* Màu xám đậm */
+}
+
+/* --- CỤM NÚT MUA HÀNG --- */
+.cac-nut-hanh-dong {
+    display: flex; /* Xếp dọc các nút */
+    flex-direction: column; /* Theo chiều dọc */
+    gap: 10px; /* Khoảng cách giữa các nút */
+    margin-bottom: 25px; /* Cách phần dưới */
+}
+
+.nut {
+    width: 100%; /* Chiếm toàn chiều ngang khung */
+    padding: 15px; /* Đệm trong nút */
+    border: none; /* Bỏ viền */
+    border-radius: 16px; /* Bo tròn góc nút */
+    font-size: 16px; /* Kích thước chữ */
+    font-weight: bold; /* Đậm chữ */
+    cursor: pointer; /* Con trỏ tay */
+    transition: opacity 0.2s; /* Hiệu ứng hover mượt */
+}
+
+    .nut:hover {
+        opacity: 0.9; /* Giảm nhẹ độ sáng khi hover */
+    }
+
+.nut-mua-ngay {
+    background-color: #FFB7B2; /* Hồng nhạt */
+    color: white; /* Chữ trắng */
+}
+
+.nut-them-gio-hang {
+    background-color: #78D9B7; /* Xanh mint */
+    color: white; /* Chữ trắng */
+}
+
+/* --- KHUNG KHUYẾN MÃI --- */
+.khuyen-mai {
+    border: 1px solid #BFC0C0; /* Viền xám nhạt */
+    border-radius: 12px; /* Bo góc nhẹ */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    padding: 15px; /* Đệm trong khung */
+    margin-bottom: 20px; /* Cách phần dưới */
+}
+
+    .khuyen-mai ul {
+        list-style-type: disc; /* Dấu chấm đầu dòng */
+        padding-left: 20px; /* Thụt đầu dòng */
+        margin: 0; /* Bỏ khoảng cách mặc định */
+        font-size: 14px; /* Cỡ chữ nhỏ gọn */
+        line-height: 1.6; /* Giãn dòng dễ đọc */
+    }

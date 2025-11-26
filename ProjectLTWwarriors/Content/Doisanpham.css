@@ -1,0 +1,35 @@
+﻿.Danh_Sach_San_Pham {
+    position: relative; /* Để các mũi tên có thể được căn chỉnh */
+}
+
+.Danh_Sach_San_Pham_Group {
+    display: none; /* Ẩn tất cả các nhóm sản phẩm mặc định */
+    gap: 15px;
+}
+
+    .Danh_Sach_San_Pham_Group:first-of-type {
+        display: flex; /* Hiển thị nhóm đầu tiên */
+    }
+
+.Danh_Sach_San_Pham_Navigation {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.prev-arrow, .next-arrow {
+    cursor: pointer;
+    font-size: 20px;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+    .prev-arrow:hover, .next-arrow:hover {
+        background-color: #ddd;
+    }

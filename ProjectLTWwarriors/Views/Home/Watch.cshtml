@@ -1,0 +1,16 @@
+﻿@model List<ProjectLTWwarriors.Models.Products>
+
+@{
+    ViewBag.Title = "Watch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Watch.css" rel="stylesheet" />
+
+<link href="~/Content/Doisanpham.css" rel="stylesheet" />
+
+@*JAVASCRIPT*@
+
+<script src="~/Scripts/Doisanpham.js"></script>
+
+
+@Html.Partial("_PVSlider", Model)

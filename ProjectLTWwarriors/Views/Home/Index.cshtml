@@ -1,0 +1,16 @@
+﻿@model IEnumerable<ProjectLTWwarriors.Models.Product>
+
+<h1>Danh sách sản phẩm</h1>
+
+<ul>
+    @foreach (var p in Model)
+    {
+        <li>
+            @p.Name - @string.Format("{0:N0}đ", p.Price)
+            |
+            <a href="@Url.Action("ProductDetail", "Home", new { id = p.Id })">
+                Xem chi tiết
+            </a>
+        </li>
+    }
+</ul>

@@ -1,0 +1,49 @@
+﻿@model List<ProjectLTWwarriors.Models.Products>
+
+@{
+    var maxItemsPerPage = 4;  // Số sản phẩm tối đa trong mỗi nhóm
+    var items = Model.ToList();  // Lấy tất cả các sản phẩm từ Model
+
+    // Chia sản phẩm thành các nhóm nhỏ (mỗi nhóm chứa tối đa 4 sản phẩm)
+    var groupedItems = items
+                        .Select((item, index) => new { Item = item, Group = index / maxItemsPerPage })
+                        .GroupBy(x => x.Group)
+                        .ToList();
+}
+
+
+
+<div>
+    <div class="Bo_Khung_San_Pham">
+        <p class="Bo_Khung_San_Pham_Title">iPhone</p>
+        <a class="Banner"></a>
+
+        <div class="Danh_Sach_San_Pham" id="DanhSach_iPhone">
+            @foreach (var group in groupedItems)
+            {
+                <div class="Danh_Sach_San_Pham_Group" data-group="@group.Key">
+                    @foreach (var product in group)
+                    {
+                        <div class="The_San_Pham">
+                            <a href="@Url.Action("ProductDetail", "Home", new { id = product.Item.Id })">
+                                <img class="TheSanPham_HinhAnh"
+                                     src="@Url.Content(product.Item.ProductImages.FirstOrDefault(i => i.IsPrimary)?.ImageUrl ?? "~/Content/no-image.png")" />
+                                <p class="TheSanPham_TenThietBi">@product.Item.Name</p>
+                                <p class="TheSanPham_Gia">@($"{product.Item.Price:N0} đ")</p>
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
+
+            <!-- Điều hướng mũi tên nếu có nhiều nhóm sản phẩm -->
+            @if (groupedItems.Count > 1)
+            {
+                <div class="Danh_Sach_San_Pham_Navigation">
+                    <span class="prev-arrow" data-category="iPhone">←</span>
+                    <span class="next-arrow" data-category="iPhone">→</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
