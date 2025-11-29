@@ -1,0 +1,60 @@
+﻿@model ProjectLTWwarriors.Models.Users
+@using ProjectLTWwarriors.Models
+
+@{
+    ViewBag.Title = "Chi tiết khách hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    var orders = ViewBag.Orders as List<Orders>;
+    int orderCount = (orders != null) ? orders.Count : 0;
+}
+
+<h2>Thông tin khách hàng</h2>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <p><strong>Họ và tên:</strong> @Model.FullName</p>
+        <p><strong>Số điện thoại:</strong> @Model.Phone</p>
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>Địa chỉ:</strong> @Model.DiaChi, @Model.PhuongXa, @Model.TinhThanh</p>
+        <p><strong>Tài khoản:</strong> @Model.Username</p>
+        <p><strong>Tổng đơn hàng:</strong> @orderCount</p>
+    </div>
+</div>
+
+<h3>Lịch sử đơn hàng (@orderCount đơn)</h3>
+
+@if (orders == null || !orders.Any())
+ {
+    <p>Khách hàng này chưa có đơn hàng nào.</p>
+ }
+else
+ {
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Mã ĐH</th>
+            <th>Ngày đặt</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+            <th>Thanh toán</th>
+        </tr>
+
+        @foreach (var o in orders)
+         {
+                    <tr>
+                        <td>@o.MaDon</td>
+                        <td>@o.CreatedAt.ToString("dd/MM/yyyy")</td>
+                        <td>@String.Format("{0:N0}đ", o.TongCong)</td>
+                        <td><span class="label label-warrning">@o.TrangThai</span></td>
+                        <td>@o.PhuongThucThanhToan</td>
+                    </tr>
+         }
+
+    </table>
+ }   
+
+<div>
+    @Html.ActionLink("Quay lại danh sách", "Index", "AccountCustomer", null, new { @class = "btn btn-info btn-sm" })
+</div>
+
+

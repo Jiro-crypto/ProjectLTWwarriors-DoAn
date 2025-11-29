@@ -22,15 +22,15 @@
                         @Html.AntiForgeryToken()
 
                         <div class="hang-input">
-                            <input type="text" name="Ho" placeholder="Họ" class="o-nhap" required maxlength="30" />
-                            <input type="text" name="Ten" placeholder="Tên" class="o-nhap" required maxlength="30" />
+                            <input type="text" name="Ho" placeholder="Họ" class="o-nhap" required maxlength="50" />
+                            <input type="text" name="Ten" placeholder="Tên" class="o-nhap" required maxlength="50" />
                         </div>
 
                         <div class="nhan">Ngày sinh</div>
                         <div class="hang-input">
                             <input type="number" name="Ngay" placeholder="Ngày" class="o-nhap" min="1" max="31" required />
                             <input type="number" name="Thang" placeholder="Tháng" class="o-nhap" min="1" max="12" required />
-                            <input type="number" name="Nam" placeholder="Năm" class="o-nhap" min="1900" max="2025" required />
+                            <input type="number" name="Nam" placeholder="Năm" class="o-nhap" min="1900" max="2007" required />
                         </div>
 
                         <div class="hang-input">
@@ -39,7 +39,26 @@
                         </div>
 
                         <div class="hang-input">
+                            <input type="text" name="Phone" placeholder="Số điện thoại" class="o-nhap" required maxlength="10" pattern="^0(?!([0-9])\1+$)[0-9]{9}$" title="Bắt đầu bằng số 0"/>
+                        </div>
+
+                        <div class="hang-input">
+                            <input type="text" name="TinhThanh" placeholder="Tỉnh/Thành phố" class="o-nhap" maxlength="100" />
+                        </div>
+                        <div class="hang-input">
+                            <input type="text" name="PhuongXa" placeholder="Phường/Xã" class="o-nhap" maxlength="200" />
+                        </div>
+                        <div class="hang-input">
+                            <input type="text" name="DiaChi" placeholder="Số nhà/Tên đường" class="o-nhap" maxlength="500" />
+                        </div>
+
+                        <div class="hang-input">
                             <input type="password" name="MatKhau" placeholder="Mật khẩu" class="o-nhap"
+                                   required minlength="8" maxlength="30" />
+                        </div>
+
+                        <div class="hang-input">
+                            <input type="password" name="XacNhanMatKhau" placeholder="Xác nhận mật khẩu" class="o-nhap"
                                    required minlength="8" maxlength="30" />
                         </div>
 
@@ -50,11 +69,6 @@
                             <li>Ít nhất một chữ viết số</li>
                             <li>Ít nhất 1 ký tự đặc biệt (vd: !#%^%,v.v)</li>
                         </ul>
-
-                        <div class="hang-input">
-                            <input type="password" name="XacNhanMatKhau" placeholder="Xác nhận mật khẩu" class="o-nhap"
-                                   required minlength="8" maxlength="30" />
-                        </div>
 
                         <div class="hang-nut">
                             <a href="/Home/SignIn" class="nut nut-trang">Trở về</a>

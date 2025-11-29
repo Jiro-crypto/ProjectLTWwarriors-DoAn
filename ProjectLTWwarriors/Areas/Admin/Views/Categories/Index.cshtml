@@ -6,20 +6,20 @@
 
 <h2 class="bg-light">DANH SÁCH DANH MỤC</h2>
 
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["Success"]
-    </div>
-}
+ @if (TempData["Success"] != null)
+  {
+      <div class="alert alert-success">
+          @TempData["Success"]
+      </div>
+  }
 
 
 <table class="table">
-    <tr>
-        <th>
+      <tr>
+         <th>
             Tên danh mục
-        </th>
-        <th></th>
+         </th>
+         <th></th>
     </tr>
 
     @foreach (var item in Model)

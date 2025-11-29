@@ -43,6 +43,16 @@ public partial class Users
 
     public System.DateTime CreatedAt { get; set; }
 
+    public string Phone { get; set; }
+
+    public string TinhThanh { get; set; }
+
+    public string PhuongXa { get; set; }
+
+    public string DiaChi { get; set; }
+
+    public string Role { get; set; }
+
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

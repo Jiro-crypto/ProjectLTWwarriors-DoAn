@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Text.RegularExpressions;
 
 namespace ProjectLTWwarriors.Controllers
 {
@@ -84,7 +85,11 @@ namespace ProjectLTWwarriors.Controllers
     int Nam,
     string Email,
     string MatKhau,
-    string XacNhanMatKhau)
+    string XacNhanMatKhau,
+    string Phone, 
+    string TinhThanh, 
+    string PhuongXa, 
+    string DiaChi)
         {
             // 1. Kiểm tra mật khẩu xác nhận
             if (MatKhau != XacNhanMatKhau)
@@ -99,6 +104,14 @@ namespace ProjectLTWwarriors.Controllers
             if (existed != null)
             {
                 ViewBag.Error = "Email này đã được dùng.";
+                return View();
+            }
+
+            // 3. Validate số điện thoại
+            var phone = (Phone ?? "").Trim();
+            if (!IsValidPhone(phone))
+            {
+                ViewBag.Error = "Số điện thoại phải bắt đầu bằng 0, gồm 10 chữ số và không được toàn một số giống nhau.";
                 return View();
             }
 
@@ -122,7 +135,12 @@ namespace ProjectLTWwarriors.Controllers
                 Email = normEmail,                      // BẮT BUỘC
                 Password = MatKhau,                     // BẮT BUỘC
                 NgaySinh = ngaySinh,
-                CreatedAt = DateTime.Now                // BẮT BUỘC
+                Phone = phone,
+                TinhThanh = TinhThanh,
+                PhuongXa = PhuongXa,
+                DiaChi = DiaChi,
+                CreatedAt = DateTime.Now,               // BẮT BUỘC
+                Role = "user"
             };
 
             _db.Users.Add(user);
@@ -286,6 +304,15 @@ namespace ProjectLTWwarriors.Controllers
                 return RedirectToAction("SignIn", "Home");
             }
 
+            var current = Session["CurrentUser"] as Users;
+            if (current != null)
+            {
+                ViewBag.HoTen = current.FullName;
+                ViewBag.SoDienThoai = current.Phone;
+                ViewBag.TinhThanh = current.TinhThanh;
+                ViewBag.PhuongXa = current.PhuongXa;
+                ViewBag.DiaChi = current.DiaChi;
+            }
             // 1. Lấy giỏ hàng hiện tại từ DB
             var cart = GetOrCreateCart();
 
@@ -776,15 +803,79 @@ namespace ProjectLTWwarriors.Controllers
         }
 
 
+        // GET: /Home/Profile
+        [HttpGet]
         public new ActionResult Profile()
         {
-            var user = Session["CurrentUser"] as Users;
+            // 1. Bắt buộc đăng nhập
+            var current = Session["CurrentUser"] as Users;
+            if (current == null)
+                return RedirectToAction("SignIn");
+
+            // 2. Lấy user thật trong DB
+            var user = _db.Users.Find(current.Id);
             if (user == null)
-            {
-                return RedirectToAction("SignIn"); // Nếu chưa đăng nhập thì quay lại đăng nhập
-            }
+                return RedirectToAction("SignIn");
+
+            // 3. Trả về view Profile với model là Users
             return View(user);
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public new ActionResult Profile(Users form)
+        {
+            // 1. Bắt buộc đăng nhập
+            var current = Session["CurrentUser"] as Users;
+            if (current == null)
+                return RedirectToAction("SignIn");
+
+            // 2. Lấy user thật trong DB
+            var user = _db.Users.Find(current.Id);
+            if (user == null)
+                return RedirectToAction("SignIn");
+
+            // 3.1 Validate của tên
+            var fullName = (form.FullName ?? "").Trim(); //Trim() dùng để xóa khoảng trắng ở đầu và cuối
+            if (string.IsNullOrEmpty(fullName))
+            {
+                ModelState.AddModelError("FullName", "Họ tên không được để trống.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(user); // trả về thông tin cũ + error
+            }
+
+            // 3.2 Validate số điện thoại
+            var phone = (form.Phone ?? "").Trim();
+            if (!string.IsNullOrEmpty(phone) && !IsValidPhone(phone))
+            {
+                ModelState.AddModelError("Phone",
+                    "Số điện thoại phải bắt đầu bằng 0, gồm 10 chữ số và không được toàn một số giống nhau.");
+            }
+
+
+            // 4. Ghi các field được phép sửa
+            user.FullName = fullName;
+            user.NgaySinh = form.NgaySinh;
+            user.Phone = phone;
+            user.TinhThanh = form.TinhThanh;
+            user.PhuongXa = form.PhuongXa;
+            user.DiaChi = form.DiaChi;
+
+            _db.SaveChanges();
+
+            // 5. Cập nhật lại Session
+            Session["CurrentUser"] = user;
+            Session["CurrentUserName"] = user.FullName;
+
+            ViewBag.Success = "Cập nhật thông tin thành công!";
+            return View(user);
+        }
+
+
 
 
         // Trả về số lượng sản phẩm trong giỏ hàng (cho JavaScript cập nhật header)
@@ -819,6 +910,17 @@ namespace ProjectLTWwarriors.Controllers
             return Json(new { count }, JsonRequestBehavior.AllowGet);
         }
 
+        //Dùng để kiểm tra mật khẩu
+        private bool IsValidPhone(string phone)
+        {
+            if (string.IsNullOrWhiteSpace(phone)) return false;
+
+            phone = phone.Trim();
+
+            // Bắt đầu bằng 0, tổng 10 số, không được toàn 1 số giống nhau (vd: 0000000000)
+            var regex = new Regex(@"^0(?!([0-9])\1+$)[0-9]{9}$"); //regax: regular expression dùng để kiểm tra chuỗi đúng định dạng
+            return regex.IsMatch(phone);
+        }
 
 
         private int GetCurrentUserId()

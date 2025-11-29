@@ -25,7 +25,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
 
-            // ===== HÀM CẬP NHẬT SỐ LƯỢNG Ở ICON GIỎ HÀNG =====
+            // HÀM CẬP NHẬT SỐ LƯỢNG Ở ICON GIỎ HÀNG
             function updateCartCount() {
                 fetch('/Home/GetCartCount')
                     .then(r => r.json())
