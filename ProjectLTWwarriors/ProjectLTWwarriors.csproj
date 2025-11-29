@@ -136,8 +136,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountCustomerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\ProductData.cs" />
@@ -321,6 +325,16 @@
     <Content Include="Areas\Admin\Views\Categories\PVCreateEditCategory.cshtml" />
     <Content Include="Areas\Admin\Views\Products\PVCreateEditProduct.cshtml" />
     <Content Include="Areas\Admin\Views\Products\PVListProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AccountCustomer\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AccountCustomer\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderManagement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderManagement\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\Doisanpham.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
@@ -370,6 +384,7 @@
     <Content Include="Views\Home\ChiTietDonHang.cshtml" />
     <Content Include="Views\Home\_PVNewProduct.cshtml" />
     <Content Include="Views\Home\_PVSlider.cshtml" />
+    <Content Include="Views\Home\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="All_Images\iPad\11%28A16%295G\" />
@@ -463,6 +478,7 @@
     <Folder Include="All_Images\Watch\WatchUltra3GPSCellular49mmVienTitaniumDayOcean\" />
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Views\Profile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

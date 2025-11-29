@@ -1,0 +1,98 @@
+﻿@model ProjectLTWwarriors.Models.Users
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/Profile.css" rel="stylesheet" />
+
+<div class="container" style="max-width:700px; margin:40px auto;">
+    <h2 style="text-align:center; margin-bottom:20px;">Thông tin tài khoản</h2>
+
+    @if (ViewBag.Success != null)
+    {
+        <div class="alert alert-success">@ViewBag.Success</div>
+    }
+
+    @using (Html.BeginForm("Profile", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <label>Tên đăng nhập (không thay đổi)</label>
+            <input type="text"
+                   class="form-control"
+                   value="@Model.Username"
+                   readonly />
+        </div>
+
+        <div class="form-group">
+            <label>Họ tên</label>
+            <input type="text"
+                   name="FullName"
+                   class="form-control"
+                   value="@Model.FullName"
+                   maxlength="12"
+                   required />
+            @Html.ValidationMessage("FullName", "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label>Email (không thay đổi)</label>
+            <input type="email"
+                   class="form-control"
+                   value="@Model.Email"
+                   readonly />
+        </div>
+
+        <div class="form-group">
+            <label>Ngày sinh</label>
+            <input type="date"
+                   name="NgaySinh"
+                   class="form-control"
+                   min="1900-01-01"
+                   max="2007-12-31"
+                   value="@(Model.NgaySinh.HasValue ? Model.NgaySinh.Value.ToString("yyyy-MM-dd") : "")" />
+        </div>
+
+        <div class="form-group">
+            <label>Số điện thoại</label>
+            <input type="text" name="Phone"
+                   class="form-control"
+                   value="@Model.Phone"
+                   maxlength="10"
+                   pattern="^0(?!([0-9])\1+$)[0-9]{9}$"
+                   title="Bắt đầu bằng 0" />
+            @Html.ValidationMessage("Phone", "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label>Tỉnh/Thành phố</label>
+            <input type="text" name="TinhThanh"
+                   class="form-control"
+                 
+                   value="@Model.TinhThanh" />
+        </div>
+
+        <div class="form-group">
+            <label>Phường/Xã</label>
+            <input type="text" name="PhuongXa"
+                   class="form-control"
+                  
+                   value="@Model.PhuongXa" />
+        </div>
+
+        <div class="form-group">
+            <label>Số nhà/Tên đường</label>
+            <input type="text" name="DiaChi"
+                   class="form-control"
+                  
+                   value="@Model.DiaChi" />
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+
+        <a href="~/Home/LandingPage"
+           class="btn btn-secondary">Về trang chủ</a>
+    }
+</div>

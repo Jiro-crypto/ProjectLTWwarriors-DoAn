@@ -46,6 +46,7 @@
             </a>
         </div>
 
+        <!-- LỊCH SỬ MUA HÀNG-->
         <div class="lich-su">
             <a href="@Url.Action("LichSuMuaHang","Home")">
                 <i class="fa fa-calendar cart-icon" aria-hidden="true"></i>
@@ -56,8 +57,11 @@
         @if (currentUser != null)
         {
             <div class="user-box">
-                <i class="fa-regular fa-circle-user cart-icon"></i>
-                <span class="user-name">@currentUser.FullName</span>
+                <a href="@Url.Action("Profile", "Home")" class="user-link">
+                    <i class="fa-regular fa-circle-user cart-icon"></i>
+                    <span class="user-name">@currentUser.FullName</span>
+                </a>
+
                 <a href="@Url.Action("Logout", "Home")" class="logout-link">Đăng xuất</a>
             </div>
         }
@@ -69,6 +73,7 @@
                 </a>
             </div>
         }
+
     </div>
 
     <style>
@@ -129,6 +134,35 @@
             width: 350px;
             background: transparent;
         }
+
+        .user-name-link {
+            font-weight: 500;
+            color: #000;
+            text-decoration: none;
+        }
+
+            .user-name-link:hover {
+                text-decoration: underline;
+            }
+
+        .user-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #000;
+            text-decoration: none;
+        }
+
+            .user-link:hover .user-name {
+                text-decoration: underline;
+            }
+
     </style>
 
 </header>

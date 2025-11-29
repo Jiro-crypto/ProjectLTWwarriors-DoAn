@@ -1,13 +1,17 @@
 ﻿@model List<ProjectLTWwarriors.Models.MatHangTrongGio>
+@using ProjectLTWwarriors.Models
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    // Tính tổng tiền trực tiếp từ Model
+    // Lấy user hiện tại (đã được gắn ở OnActionExecuting)
+    var currentUser = ViewBag.CurrentUser as Users;
+
+    // Tổng tiền từ controller
     decimal tongTienHang = 0;
-    if (Model != null)
+    if (ViewBag.TongTienHang != null)
     {
-        tongTienHang = Model.Sum(item => item.SanPham.Price * item.SoLuong);
+        tongTienHang = (decimal)ViewBag.TongTienHang;
     }
 }
 
@@ -16,92 +20,137 @@
 <div class="tt-page-wrapper">
     <div class="tt-trang-thanh-toan">
 
-        <!-- Gộp form: chỉ cần 1 form duy nhất -->
-        @using (Html.BeginForm("TienHanhThanhToan", "Home", FormMethod.Post))
-        {
-            <div class="tt-khung-thong-tin">
-                <!-- Cột trái: thông tin khách hàng -->
-                <div class="tt-cot-trai">
-                    <h3>Thông tin khách hàng</h3>
-                    <input type="text" placeholder="Họ và tên" class="tt-o-nhap" name="HoTen" required maxlength="30" />
+                        @* FORM THANH TOÁN *@
+                        @using (Html.BeginForm("TienHanhThanhToan", "Home", FormMethod.Post))
+                         {
+                               <div class="tt-khung-thong-tin">
+                         <!-- Cột trái: thông tin khách hàng -->
+                                    <div class="tt-cot-trai">
+                                        <h3>Thông tin khách hàng</h3>
+                                            <input type="text"
+                                             placeholder="Họ và tên"
+                                             class="tt-o-nhap"
+                                             name="HoTen"
+                                             required
+                                             maxlength="30"
+                                             value="@(currentUser != null ? currentUser.FullName : "")" />
 
-                    <input type="tel" placeholder="Số điện thoại" class="tt-o-nhap" name="SoDienThoai" required maxlength="12" />
-                    <input type="text" placeholder="Tỉnh/Thành phố" class="tt-o-nhap" name="TinhThanh" required maxlength="30" />
-                    <input type="text" placeholder="Phường/Xã" class="tt-o-nhap" name="PhuongXa" required maxlength="30" />
-                    <input type="text" placeholder="Số nhà/Tên đường" class="tt-o-nhap" name="DiaChi" required maxlength="30" />
-                    <input type="text" placeholder="Ghi chú (nếu có)" class="tt-o-nhap" name="GhiChu" />
+                                             <input type="tel"
+                                              placeholder="Số điện thoại"
+                                              class="tt-o-nhap"
+                                              name="SoDienThoai"
+                                              required
+                                              maxlength="10"
+                                              value="@(currentUser != null ? currentUser.Phone : "")" />
 
-                    <div class="tt-nut-hanh-dong">
-                        <button type="reset" class="tt-nut-xoa">Xóa</button>
-                    </div>
-                </div>
+                                              <input type="text"
+                                              placeholder="Tỉnh/Thành phố"
+                                              class="tt-o-nhap"
+                                              name="TinhThanh"
+                                              required
+                                              maxlength="30"
+                                              value="@(currentUser != null ? currentUser.TinhThanh : "")" />
 
-                <!-- Cột phải: phương thức thanh toán -->
-                <div class="tt-cot-phai">
-                    <h3>Phương thức thanh toán</h3>
-                    <div class="tt-phuong-thuc">
-                        @*<label>
-                            <input type="radio" name="PhuongThucThanhToan" value="Momo" required /> Momo
-                        </label>*@
-                        <label>
-                            <input type="radio" name="PhuongThucThanhToan" value="COD" required /> Thanh toán khi nhận hàng
-                        </label>
-                    </div>
+                                             <input type="text"
+                                              placeholder="Phường/Xã"
+                                              class="tt-o-nhap"
+                                              name="PhuongXa"
+                                              required
+                                              maxlength="30"
+                                              value="@(currentUser != null ? currentUser.PhuongXa : "")" />
 
-                    @*<h3>LTWarriors voucher</h3>
-                    <div class="tt-voucher">
-                        <input type="text" placeholder="Nhập mã voucher" class="tt-o-nhap" name="VoucherCode" />
-                    </div>*@
-                </div>
-            </div>
+                                             <input type="text"
+                                              placeholder="Số nhà/Tên đường"
+                                              class="tt-o-nhap"
+                                              name="DiaChi"
+                                              required
+                                              maxlength="50"
+                                              value="@(currentUser != null ? currentUser.DiaChi : "")" />
 
-            <!-- Bảng sản phẩm -->
-            <div class="tt-bang-san-pham">
-                <table class="tt-table">
-                    <thead>
-                        <tr class="tt-tr">
-                            <th class="tt-th">Sản phẩm</th>
-                            <th class="tt-th">Đơn giá</th>
-                            <th class="tt-th">Số lượng</th>
-                            <th class="tt-th">Thành tiền</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@item.SanPham.Name</td>
-                                <td>@string.Format("{0:N0} ₫", item.SanPham.Price)</td>
-                                <td>@item.SoLuong</td>
-                                <td>@string.Format("{0:N0} ₫", item.SanPham.Price * item.SoLuong)</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
 
-            <!-- Tổng kết -->
-            <div class="tt-tong-ket">
-                <div class="tt-dong-tien">
-                    <span>Tổng tiền hàng</span>
-                    <span>@string.Format("{0:N0} ₫", tongTienHang)</span>
-                </div>
-                <div class="tt-dong-tien">
-                    <span>Phí vận chuyển</span>
-                    <span>0 ₫</span>
-                </div>
-                <div class="tt-dong-tien">
-                    <span>Voucher</span>
-                    <span>-0 ₫</span>
-                </div>
-                <div class="tt-dong-tien tt-tong-cong">
-                    <strong>Tổng thanh toán</strong>
-                    <strong>@string.Format("{0:N0} ₫", tongTienHang)</strong>
-                </div>
+                                              <input type="text"
+                                              placeholder="Ghi chú (nếu có)"
+                                              class="tt-o-nhap"
+                                              name="GhiChu" />
 
-                <!-- Nút gửi form thật sự -->
-                <button type="submit" class="tt-nut-dat-hang">Đặt hàng</button>
-            </div>
-        }
-    </div>
+                                        <div class="tt-nut-hanh-dong">
+                                          <button type="reset" class="tt-nut-xoa">Xóa</button>
+                                        </div>
+                                    </div>
+
+                                <!-- Cột phải: phương thức thanh toán -->
+                                    <div class="tt-cot-phai">
+                                        <h3>Phương thức thanh toán</h3>
+                                        <div class="tt-phuong-thuc">
+                                             <label>
+                                                <input type="radio" name="PhuongThucThanhToan" value="Momo" required />
+                                                 Momo
+                                             </label>
+                                             <label>
+                                                 <input type="radio" name="PhuongThucThanhToan" value="COD" required />
+                                                 Thanh toán khi nhận hàng
+                                             </label>
+                                         </div>
+
+                                        <h3>LTWarriors voucher</h3>
+                                                <div class="tt-voucher">
+                                                        <input type="text"
+                                                        placeholder="Nhập mã voucher"
+                                                        class="tt-o-nhap"
+                                                        name="VoucherCode" />
+                                                </div>
+                                    </div>
+                               </div>
+
+                                  <!-- Bảng sản phẩm -->
+                                <div class="tt-bang-san-pham">
+                                    <table class="tt-table">
+                                        <thead>
+                                             <tr class="tt-tr">
+                                                    <th class="tt-th">Sản phẩm</th>
+                                                    <th class="tt-th">Đơn giá</th>
+                                                    <th class="tt-th">Số lượng</th>
+                                                    <th class="tt-th">Thành tiền</th>
+                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                             @if (Model != null)
+                                              {
+                                                    foreach (var item in Model)
+                                                    {
+                                                        <tr>
+                                                            <td>@item.SanPham.Name</td>
+                                                            <td>@string.Format("{0:N0} ₫", item.SanPham.Price)</td>
+                                                            <td>@item.SoLuong</td>
+                                                            <td>@string.Format("{0:N0} ₫", item.SanPham.Price * item.SoLuong)</td>
+                                                        </tr>
+                                                    }
+                                              }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Tổng kết -->
+                                    <div class="tt-tong-ket">
+                                        <div class="tt-dong-tien">
+                                              <span>Tổng tiền hàng</span>
+                                              <span>@string.Format("{0:N0} ₫", tongTienHang)</span>
+                                        </div>
+                                        <div class="tt-dong-tien">
+                                               <span>Phí vận chuyển</span>
+                                               <span>0 ₫</span>
+                                        </div>
+                                        <div class="tt-dong-tien">
+                                               <span>Voucher</span>
+                                               <span>-0 ₫</span>
+                                        </div>
+                                        <div class="tt-dong-tien tt-tong-cong">
+                                               <strong>Tổng thanh toán</strong>
+                                               <strong>@string.Format("{0:N0} ₫", tongTienHang)</strong>
+                                         </div>
+
+                                            <button type="submit" class="tt-nut-dat-hang">Đặt hàng</button>
+                                        </div>
+                         }
+      </div>
 </div>

@@ -1,4 +1,4 @@
-﻿@model ProjectLTWwarriors.Models.ViewModel.ProductSearchVm
+﻿       @model ProjectLTWwarriors.Models.ViewModel.ProductSearchVm
 
 @{
     ViewBag.Title = "Index";
@@ -25,27 +25,27 @@
 {
     <div class="form-group search-container">
         @Html.TextBoxFor(m => m.SearchTerm, new
-        {
-            @class = "form-control",
-            placeholder = "Nhập tên, mô tả hoặc danh mục sản phẩm",
-            style = "width:250px;"
-        })
+   {
+       @class = "form-control",
+       placeholder = "Nhập tên, mô tả hoặc danh mục sản phẩm",
+       style = "width:250px;"
+   })
 
         @Html.TextBoxFor(m => m.MinPrice, new
-        {
-            @class = "form-control",
-            placeholder = "Giá tối thiểu",
-            type = "number",
-            style = "width:120px;"
-        })
+   {
+       @class = "form-control",
+       placeholder = "Giá tối thiểu",
+       type = "number",
+       style = "width:120px;"
+   })
 
         @Html.TextBoxFor(m => m.MaxPrice, new
-        {
-            @class = "form-control",
-            placeholder = "Giá tối đa",
-            type = "number",
-            style = "width:120px;"
-        })
+   {
+       @class = "form-control",
+       placeholder = "Giá tối đa",
+       type = "number",
+       style = "width:120px;"
+   })
 
         <button type="submit" class="btn btn-dark">Tìm kiếm</button>
     </div>
@@ -53,40 +53,48 @@
     <div class="form-group order-container">
         Sắp xếp theo:
         @Html.ActionLink("Tên tăng dần", "Index",
-             new
-                  {
-                 sortOrder = "name_asc",
-                 searchTerm = Model.SearchTerm,
-                 minPrice = Model.MinPrice,
-                 maxPrice = Model.MaxPrice
-             })
+               new
+               {
+                   sortOrder = "name_asc",
+                   searchTerm = Model.SearchTerm,
+                   minPrice = Model.MinPrice,
+                   maxPrice = Model.MaxPrice,
+               },
+               new { @class = "btn btn-dark btn-sm sort-btn" }
+        )
         |
         @Html.ActionLink("Tên giảm dần", "Index",
-             new
-                  {
-                 sortOrder = "name_desc",
-                 searchTerm = Model.SearchTerm,
-                 minPrice = Model.MinPrice,
-                 maxPrice = Model.MaxPrice
-             })
+               new
+               {
+                   sortOrder = "name_desc",
+                   searchTerm = Model.SearchTerm,
+                   minPrice = Model.MinPrice,
+                   maxPrice = Model.MaxPrice
+               },
+               new { @class = "btn btn-dark btn-sm sort-btn" }
+        )
         |
         @Html.ActionLink("Giá tăng dần", "Index",
-             new
+                  new
                   {
-                 sortOrder = "price_asc",
-                 searchTerm = Model.SearchTerm,
-                 minPrice = Model.MinPrice,
-                 maxPrice = Model.MaxPrice
-             })
+                      sortOrder = "price_asc",
+                      searchTerm = Model.SearchTerm,
+                      minPrice = Model.MinPrice,
+                      maxPrice = Model.MaxPrice
+                  },
+                  new { @class = "btn btn-dark btn-sm sort-btn" }
+        )
         |
         @Html.ActionLink("Giá giảm dần", "Index",
-             new
+                  new
                   {
-                 sortOrder = "price_desc",
-                 searchTerm = Model.SearchTerm,
-                 minPrice = Model.MinPrice,
-                 maxPrice = Model.MaxPrice
-             })
+                      sortOrder = "price_desc",
+                      searchTerm = Model.SearchTerm,
+                      minPrice = Model.MinPrice,
+                      maxPrice = Model.MaxPrice
+                  },
+                  new { @class = "btn btn-dark btn-sm sort-btn" }
+        )
     </div>
 }
 

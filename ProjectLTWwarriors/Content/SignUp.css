@@ -12,6 +12,7 @@
     padding: 40px 0;
     font-family: sans-serif;
     background-color: white;
+    min-height: 100vh;
 }
 
 .hop-dangky {
@@ -21,7 +22,7 @@
     padding: 32px 40px;
     box-shadow: 0 0 5px rgba(0,0,0,0.05);
     width: 500px;
-    height: 745px;
+    height: auto;
 }
 
 .Tieu_de {
