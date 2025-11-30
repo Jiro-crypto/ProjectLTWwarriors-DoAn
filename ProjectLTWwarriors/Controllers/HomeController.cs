@@ -234,7 +234,7 @@ namespace ProjectLTWwarriors.Controllers
             var tainghe_loa = _db.Products
                             .Include(p => p.ProductImages)
                             .Where(p => p.Status == "active" && // chỉ lấy những sản phẩm còn active
-                                        p.Categories.Name == "Tai Nghe, Loa") //lấy sản phẩm TaINghe_Loa trong catagory
+                                        p.Categories.Name == "TaiNghe_Loa") //lấy sản phẩm TaINghe_Loa trong catagory
                             .ToList();
 
             return View(tainghe_loa);   // truyền list sản phẩm qua View

@@ -231,53 +231,7 @@ ul {
 }
 
 
-/*mobile */
-@media (max-width: 767px) {
-    .menu-icon {
-        display: block;
-        font-size: 28px;
-        cursor: pointer;
-    }
-
-    /* Ẩn menu mặc định khi trên mobile */
-    .Nav ul {
-        display: none;
-        flex-direction: column;
-        background: white;
-        position: absolute;
-        top: 80px;
-        right: 20px;
-        padding: 10px 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    .Nav ul.show {
-        display: flex;
-    }
-
-    /* Ẩn ô nhập tìm kiếm */
-    .Search input {
-        display: none;
-    }
-
-    .Search {
-        width: auto;
-    }
-
-    .Search i {
-        font-size: 22px;
-        cursor: pointer;
-    }
-}
-
-@media (min-width: 768px) {
-    .menu-icon {
-        display: none;
-    }
-}
-
-/* ===== MOBILE ===== */
+/* MOBILE */
 @media (max-width: 767px) {
 
     .Header {
@@ -289,6 +243,7 @@ ul {
         font-size: 20px;
     }
 
+    /* Hiện menu-icon */
     .menu-icon {
         display: block;
         font-size: 24px;
@@ -296,6 +251,7 @@ ul {
         margin-left: 8px;
     }
 
+    /* Ẩn menu mặc định, chuyển sang dạng xổ */
     .Nav ul {
         display: none;
         flex-direction: column;
@@ -313,10 +269,12 @@ ul {
             display: flex;
         }
 
+    /* Ẩn input tìm kiếm */
     .Search input {
         display: none;
     }
 
+    /* Chỉ hiện icon tìm kiếm */
     .Search {
         width: auto;
         border: none;
@@ -331,17 +289,20 @@ ul {
             margin-left: 4px;
         }
 
+    /* Ẩn tên user & link logout trên mobile */
     .user-name,
     .logout-link {
         display: none;
     }
 
+    /* Gom icon phải lại cho gọn */
     .gio-hang,
     .lich-su,
     .user-box {
         margin-left: 6px;
     }
 }
+
 
 /* DESKTOP */
 @media (min-width: 768px) {
@@ -369,6 +330,8 @@ ul {
         background-color: red;
         color: white;
     }
+
+
 /* Tăng khoảng cách giữa các icon phía bên phải */
 .header-right-group > div,
 .header-right-group > .user-box {
@@ -381,5 +344,90 @@ ul {
     gap: 25px; /* ĐÂY LÀ THỨ TẠO KHOẢNG CÁCH ĐỀU GIỮA CÁC ICON */
 }
 
+/*.Header {
+    display: flex;
+    justify-content: space-between;*/ /* Chia không gian giữa các phần tử*/ 
+    /*align-items: center;*/  /*Căn giữa các phần tử theo chiều dọc */
+    /*padding: 10px;
+    gap: 20px;*/ /* Khoảng cách giữa các phần tử trong Header */
+/*}
+
+.Nav {
+    display: flex;
+    gap: 20px;*/  /*Khoảng cách giữa các mục menu */
+    /*flex-grow: 1;
+}
+
+.search-input {
+    margin-left: 10px;
+}
+
+.gio-hang, .user-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;*/  /*Khoảng cách giữa các phần tử trong giỏ hàng và người dùng */
+/*}*/
+
+.badge {
+    display: inline-block;
+    min-width: 20px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    background: #dc3545;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+}
+
+.user-name {
+    font-weight: 500;
+}
+
+.logout-link {
+    color: #f97316;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+    .logout-link:hover {
+        text-decoration: underline;
+    }
+
+.search-input {
+    border: none;
+    outline: none;
+    padding-left: 8px;
+    font-size: 14px;
+    width: 350px;
+    background: transparent;
+}
+
+.user-name-link {
+    font-weight: 500;
+    color: #000;
+    text-decoration: none;
+}
+
+    .user-name-link:hover {
+        text-decoration: underline;
+    }
+
+.user-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #000;
+    text-decoration: none;
+}
+
+    .user-link:hover .user-name {
+        text-decoration: underline;
+    }
 
 

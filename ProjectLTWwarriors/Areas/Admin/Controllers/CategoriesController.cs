@@ -93,7 +93,7 @@ namespace ProjectLTWwarriors.Areas.Admin.Controllers
             }
 
             // Check: danh mục này có sản phẩm nào không?
-            bool hasProducts = db.Products.Any(p => p.CategoryId == categories.Id); // đổi CategoryId nếu tên khác
+            bool hasProducts = db.Products.Any(p => p.CategoryId == categories.Id && p.Status == "active"); // đổi CategoryId nếu tên khác
 
             if (hasProducts)
             {
