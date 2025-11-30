@@ -38,132 +38,133 @@
             }
         </div>
 
-        <!-- GIỎ HÀNG -->
-        <div class="gio-hang">
-            <a href="@Url.Action("XemGioHang","Home")" class="nav-link">
-                <i class="fas fa-shopping-cart cart-icon"></i>
-                <span id="cart-count" class="badge bg-danger">0</span>
-            </a>
-        </div>
-
-        <!-- LỊCH SỬ MUA HÀNG-->
-        <div class="lich-su">
-            <a href="@Url.Action("LichSuMuaHang","Home")">
-                <i class="fa fa-calendar cart-icon" aria-hidden="true"></i>
-            </a>
-        </div>
-
-        <!-- USER / LOGIN -->
-        @if (currentUser != null)
-        {
-            <div class="user-box">
-                <a href="@Url.Action("Profile", "Home")" class="user-link">
-                    <i class="fa-regular fa-circle-user cart-icon"></i>
-                    <span class="user-name">@currentUser.FullName</span>
-                </a>
-
-                <a href="@Url.Action("Logout", "Home")" class="logout-link">Đăng xuất</a>
-            </div>
-        }
-        else
-        {
-            <div>
-                <a href="@Url.Action("SignIn","Home")">
-                    <i class="fa-regular fa-circle-user cart-icon"></i>
+        <div class="header-right-group">
+            <!-- GIỎ HÀNG -->
+            <div class="gio-hang">
+                <a href="@Url.Action("XemGioHang","Home")" class="nav-link">
+                    <i class="fas fa-shopping-cart cart-icon"></i>
+                    <span id="cart-count" class="badge bg-danger">0</span>
                 </a>
             </div>
-        }
 
+            <!-- LỊCH SỬ MUA HÀNG-->
+            <div class="lich-su">
+                <a href="@Url.Action("LichSuMuaHang","Home")">
+                    <i class="fa fa-calendar cart-icon" aria-hidden="true"></i>
+                </a>
+            </div>
+
+            <!-- USER / LOGIN -->
+            @if (currentUser != null)
+            {
+                <div class="user-box">
+                    <a href="@Url.Action("Profile", "Home")" class="user-link">
+                        <i class="fa-regular fa-circle-user cart-icon"></i>
+                        <span class="user-name">@currentUser.FullName</span>
+                    </a>
+
+                    <a href="@Url.Action("Logout", "Home")" class="logout-link">Đăng xuất</a>
+                </div>
+            }
+            else
+            {
+                <div>
+                    <a href="@Url.Action("SignIn","Home")">
+                        <i class="fa-regular fa-circle-user cart-icon"></i>
+                    </a>
+                </div>
+            }
+
+        </div>
     </div>
 
-    <style>
-        .Header {
-            display: flex;
-            justify-content: space-between; /* Chia không gian giữa các phần tử */
-            align-items: center; /* Căn giữa các phần tử theo chiều dọc */
-            padding: 10px;
-            gap: 20px; /* Khoảng cách giữa các phần tử trong Header */
-        }
-
-        .Nav {
-            display: flex;
-            gap: 20px; /* Khoảng cách giữa các mục menu */
-            flex-grow: 1;
-        }
-
-        .search-input {
-            margin-left: 10px;
-        }
-
-        .gio-hang, .user-box {
-            display: flex;
-            align-items: center;
-            gap: 10px; /* Khoảng cách giữa các phần tử trong giỏ hàng và người dùng */
-        }
-
-        .badge {
-            display: inline-block;
-            min-width: 20px;
-            padding: 2px 6px;
-            border-radius: 10px;
-            background: #dc3545;
-            color: #fff;
-            text-align: center;
-            font-size: 12px;
-        }
-
-        .user-name {
-            font-weight: 500;
-        }
-
-        .logout-link {
-            color: #f97316;
-            font-size: 13px;
-            text-decoration: none;
-        }
-
-            .logout-link:hover {
-                text-decoration: underline;
+        <style>
+            .Header {
+                display: flex;
+                justify-content: space-between; /* Chia không gian giữa các phần tử */
+                align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+                padding: 10px;
+                gap: 20px; /* Khoảng cách giữa các phần tử trong Header */
             }
 
-        .search-input {
-            border: none;
-            outline: none;
-            padding-left: 8px;
-            font-size: 14px;
-            width: 350px;
-            background: transparent;
-        }
-
-        .user-name-link {
-            font-weight: 500;
-            color: #000;
-            text-decoration: none;
-        }
-
-            .user-name-link:hover {
-                text-decoration: underline;
+            .Nav {
+                display: flex;
+                gap: 20px; /* Khoảng cách giữa các mục menu */
+                flex-grow: 1;
             }
 
-        .user-box {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .user-link {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: #000;
-            text-decoration: none;
-        }
-
-            .user-link:hover .user-name {
-                text-decoration: underline;
+            .search-input {
+                margin-left: 10px;
             }
 
-    </style>
+            .gio-hang, .user-box {
+                display: flex;
+                align-items: center;
+                gap: 10px; /* Khoảng cách giữa các phần tử trong giỏ hàng và người dùng */
+            }
+
+            .badge {
+                display: inline-block;
+                min-width: 20px;
+                padding: 2px 6px;
+                border-radius: 10px;
+                background: #dc3545;
+                color: #fff;
+                text-align: center;
+                font-size: 12px;
+            }
+
+            .user-name {
+                font-weight: 500;
+            }
+
+            .logout-link {
+                color: #f97316;
+                font-size: 13px;
+                text-decoration: none;
+            }
+
+                .logout-link:hover {
+                    text-decoration: underline;
+                }
+
+            .search-input {
+                border: none;
+                outline: none;
+                padding-left: 8px;
+                font-size: 14px;
+                width: 350px;
+                background: transparent;
+            }
+
+            .user-name-link {
+                font-weight: 500;
+                color: #000;
+                text-decoration: none;
+            }
+
+                .user-name-link:hover {
+                    text-decoration: underline;
+                }
+
+            .user-box {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .user-link {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                color: #000;
+                text-decoration: none;
+            }
+
+                .user-link:hover .user-name {
+                    text-decoration: underline;
+                }
+        </style>
 
 </header>
 

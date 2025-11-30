@@ -211,27 +211,39 @@ namespace ProjectLTWwarriors.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var product = db.Products.Find(id);
+            // Tìm sản phẩm theo Id
+            Products product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
             }
 
-            // Không xóa cứng, chỉ ẩn sản phẩm
-            product.Status = "inactive"; // ẩn sản phẩm
+            // 1. Kiểm tra xem sản phẩm này có đang nằm trong bất kỳ đơn hàng nào không
+            bool isInOrder = db.OrderItems.Any(oi => oi.ProductId == id);
 
+            if (isInOrder)
+            {
+                // 2. Nếu có, KHÔNG cho xóa báo lỗi
+                TempData["ErrorMessage"] = $"Không thể xóa sản phẩm '{product.Name}' vì nó đang nằm trong đơn hàng.";
+                return RedirectToAction("Index");
+            }
+
+            // 3. Nếu không có trong đơn hàng, xóa bình thường
+            db.Products.Remove(product);
             db.SaveChanges();
 
+            TempData["SuccessMessage"] = "Xóa sản phẩm thành công!";
             return RedirectToAction("Index");
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
