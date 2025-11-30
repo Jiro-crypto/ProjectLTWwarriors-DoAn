@@ -82,7 +82,9 @@ body {
 
     /* (2) Ô input bên trong thanh tìm kiếm */
     .Search input {
-        flex: 0 0 100px; /* Input chiếm toàn bộ phần còn lại */
+       /* flex: 0 0 100px;*/ /* Input chiếm toàn bộ phần còn lại */
+        flex: 1; /* Giãn hết chiều ngang còn lại */
+        max-width: 400px;
         height: 100%; /* Bằng chiều cao khung cha */
         border-radius: 100px; /* Bo tròn đồng nhất */
         background: transparent; /* Trong suốt để nhìn thấy viền cha */
@@ -274,5 +276,110 @@ ul {
         display: none;
     }
 }
+
+/* ===== MOBILE ===== */
+@media (max-width: 767px) {
+
+    .Header {
+        padding: 8px 12px;
+        gap: 10px;
+    }
+
+    .Logo {
+        font-size: 20px;
+    }
+
+    .menu-icon {
+        display: block;
+        font-size: 24px;
+        cursor: pointer;
+        margin-left: 8px;
+    }
+
+    .Nav ul {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 70px;
+        right: 10px;
+        padding: 10px 16px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        z-index: 999;
+    }
+
+        .Nav ul.show {
+            display: flex;
+        }
+
+    .Search input {
+        display: none;
+    }
+
+    .Search {
+        width: auto;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+    }
+
+        .Search .SearchIcon {
+            position: static;
+            transform: none;
+            font-size: 20px;
+            margin-left: 4px;
+        }
+
+    .user-name,
+    .logout-link {
+        display: none;
+    }
+
+    .gio-hang,
+    .lich-su,
+    .user-box {
+        margin-left: 6px;
+    }
+}
+
+/* DESKTOP */
+@media (min-width: 768px) {
+    .menu-icon {
+        display: none;
+    }
+}
+
+.gio-hang {
+    position: relative;
+    display: inline-block;
+}
+
+    .gio-hang .badge {
+        position: absolute;
+        top: -6px;
+        right: -10px;
+        min-width: 16px;
+        height: 16px;
+        padding: 0;
+        border-radius: 50%;
+        font-size: 11px;
+        line-height: 16px;
+        text-align: center;
+        background-color: red;
+        color: white;
+    }
+/* Tăng khoảng cách giữa các icon phía bên phải */
+.header-right-group > div,
+.header-right-group > .user-box {
+    margin-left: 20px; /* bạn có thể đổi 20px → 25px, 30px tùy ý */
+}
+/* nhóm icon bên phải header */
+.header-right-group {
+    display: flex;
+    align-items: center;
+    gap: 25px; /* ĐÂY LÀ THỨ TẠO KHOẢNG CÁCH ĐỀU GIỮA CÁC ICON */
+}
+
 
 

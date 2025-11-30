@@ -10,7 +10,7 @@
 
 <div class="form-group">
     @Html.LabelFor(m => m.Name, "Tên danh mục", htmlAttributes: new { @class = "control-label" })
-    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Nhập tên danh mục" })
+    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Nhập tên danh mục", maxlength = "15" })
     @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
 </div>
 

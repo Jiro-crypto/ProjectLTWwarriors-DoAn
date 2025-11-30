@@ -92,6 +92,15 @@ namespace ProjectLTWwarriors.Areas.Admin.Controllers
                 ModelState.AddModelError("Name", "Tên danh mục đã tồn tại.");
             }
 
+            // Check: danh mục này có sản phẩm nào không?
+            bool hasProducts = db.Products.Any(p => p.CategoryId == categories.Id); // đổi CategoryId nếu tên khác
+
+            if (hasProducts)
+            {
+                // Lỗi không gán field cụ thể -> hiện ở ValidationSummary
+                ModelState.AddModelError("", "Không thể sửa danh mục này vì đang có sản phẩm thuộc về nó.");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(categories).State = EntityState.Modified;
@@ -99,8 +108,11 @@ namespace ProjectLTWwarriors.Areas.Admin.Controllers
                 TempData["Success"] = "Cập nhật danh mục thành công!";
                 return RedirectToAction("Index");
             }
+
+            // Nếu có lỗi -> quay lại view, hiện ValidationSummary
             return View(categories);
         }
+
 
         // GET: Admin/Categories/Delete/5
         public ActionResult Delete(int? id)
@@ -122,12 +134,31 @@ namespace ProjectLTWwarriors.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Categories categories = db.Categories.Find(id);
-            db.Categories.Remove(categories);
+            var category = db.Categories.Find(id);
+
+            if (category == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Check: có sản phẩm nào đang dùng danh mục này không?
+            bool hasProducts = db.Products.Any(p => p.CategoryId == id); // chỉnh CategoryId đúng tên property
+
+            if (hasProducts)
+            {
+                // Không cho xoá, dùng TempData để báo lỗi ở trang Index
+                TempData["Error"] = "Không thể xóa danh mục này vì đang có sản phẩm thuộc về nó. " +
+                                    "Vui lòng xóa hoặc chuyển danh mục cho sản phẩm trước.";
+                return RedirectToAction("Index");
+            }
+
+            // Không có sản phẩm -> xoá bình thường
+            db.Categories.Remove(category);
             db.SaveChanges();
             TempData["Success"] = "Xóa danh mục thành công!";
             return RedirectToAction("Index");
         }
+
 
         protected override void Dispose(bool disposing)
         {

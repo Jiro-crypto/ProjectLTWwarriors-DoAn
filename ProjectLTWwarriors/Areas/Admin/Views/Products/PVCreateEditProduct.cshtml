@@ -9,7 +9,7 @@
 
 <div class="form-group">
     @Html.LabelFor(m => m.Name, "Tên sản phẩm", new { @class = "control-label" })
-    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Nhập tên sản phẩm" })
+    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Nhập tên sản phẩm", maxlength = "30" })
     @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
 </div>
 
@@ -21,7 +21,7 @@
 
 <div class="form-group">
     @Html.LabelFor(m => m.Description, "Mô tả", new { @class = "control-label" })
-    @Html.TextAreaFor(m => m.Description, 5, 50, new { @class = "form-control" })
+    @Html.TextAreaFor(m => m.Description, 5, 50, new { @class = "form-control", maxlength = "100" })
     @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
 </div>
 

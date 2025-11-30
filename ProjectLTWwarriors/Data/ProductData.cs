@@ -25,6 +25,7 @@ namespace ProjectLTWwarriors.Data
                     Id = p.Id,
                     Name = p.Name,
                     Price = p.Price,
+                    Description = p.Description,
 
                     CategoryName = p.Categories != null ? p.Categories.Name : null,
 
