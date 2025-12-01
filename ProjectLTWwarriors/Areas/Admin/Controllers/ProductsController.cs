@@ -179,7 +179,20 @@ namespace ProjectLTWwarriors.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                db.Entry(products).State = EntityState.Modified;
+                // Lấy sản phẩm hiện có trong DB
+                var productInDb = db.Products.Find(products.Id);
+                if (productInDb == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // Chỉ cập nhật những trường được sửa trên form
+                productInDb.Name = products.Name;
+                productInDb.Price = products.Price;
+                productInDb.Description = products.Description;
+                productInDb.CategoryId = products.CategoryId;
+                // KHÔNG đụng tới Status, CreatedAt -> giữ nguyên giá trị cũ trong DB
+
                 db.SaveChanges();
                 TempData["Success"] = "Cập nhật sản phẩm thành công!";
                 return RedirectToAction("Index");

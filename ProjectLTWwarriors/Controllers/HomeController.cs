@@ -428,7 +428,7 @@ namespace ProjectLTWwarriors.Controllers
             var cart = GetOrCreateCart();
 
             // GOM NHÓM theo ProductId, cộng Qty lại
-            var items = _db.CartItems
+            var items = _db.CartItems                                  // Lấy thông tin sản phẩm có trong giỏ hàng trong bảng CartItems để đọc xong mới chuyển dữ liệu đó sang trang GioHangCoSanPham
                            .Where(ci => ci.CartId == cart.Id)
                            .GroupBy(ci => ci.ProductId)
                            .Select(g => new
@@ -495,7 +495,7 @@ namespace ProjectLTWwarriors.Controllers
                 return Json(new { success = false, message = "Không tìm thấy sản phẩm" });
 
             var item = _db.CartItems
-                          .FirstOrDefault(ci => ci.CartId == cart.Id && ci.ProductId == maSP);
+                          .FirstOrDefault(ci => ci.CartId == cart.Id && ci.ProductId == maSP); // Tạo 1 id mới trong CartItem
 
             if (item == null)
             {
@@ -517,7 +517,7 @@ namespace ProjectLTWwarriors.Controllers
             }
 
             cart.UpdatedAt = DateTime.UtcNow;
-            _db.SaveChanges();
+            _db.SaveChanges(); //Lưu vào trong database CartItems
 
             return Json(new { success = true, message = "Đã thêm sản phẩm vào giỏ hàng!" });
         }
@@ -599,6 +599,33 @@ namespace ProjectLTWwarriors.Controllers
             bool empty = !items.Any();
 
             return Json(new { success = true, empty, count, tong });
+        }
+
+
+        [HttpPost]
+        public ActionResult XoaHetGio()
+        {
+            // Bắt buộc đăng nhập
+            if (GetCurrentUserId() == 0)
+            {
+                return Json(new { success = false, message = "Bạn cần đăng nhập để xóa giỏ hàng." });
+            }
+
+            // Lấy giỏ hàng hiện tại
+            var cart = GetOrCreateCart();
+
+            // Lấy tất cả item thuộc giỏ này
+            var items = _db.CartItems
+                           .Where(ci => ci.CartId == cart.Id)
+                           .ToList();
+
+            if (items.Any())
+            {
+                _db.CartItems.RemoveRange(items);
+                _db.SaveChanges();
+            }
+
+            return Json(new { success = true });
         }
 
 
@@ -686,7 +713,7 @@ namespace ProjectLTWwarriors.Controllers
             }
 
             // Xóa giỏ hàng sau khi đặt
-            _db.CartItems.RemoveRange(items);
+            _db.CartItems.RemoveRange(items);                                // Khi nhấn tiến hành dặt hàng thì sẽ tự động xóa dữ liệu trong CartItems
             _db.SaveChanges();
 
             // Lưu mã đơn chuyển sang trang thanh toán thành công
