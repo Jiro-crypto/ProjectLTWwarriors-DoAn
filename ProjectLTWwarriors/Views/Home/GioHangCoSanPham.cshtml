@@ -51,10 +51,10 @@
 
 
                             @*<div class="bo-chon-so-luong">
-            <button class="nut-so-luong">-</button>
-            <input type="text" value="@item.SoLuong" class="so-luong-hien-tai" readonly>
-            <button class="nut-so-luong">+</button>
-        </div>*@
+                    <button class="nut-so-luong">-</button>
+                    <input type="text" value="@item.SoLuong" class="so-luong-hien-tai" readonly>
+                    <button class="nut-so-luong">+</button>
+                </div>*@
 
                             <div class="bo-chon-so-luong">
                                 <button class="nut-so-luong nut-giam-so-luong" data-masp="@item.SanPham.Id">-</button>
@@ -67,6 +67,14 @@
 
                         </div>
                     }
+
+                    <div class="dong-tom-tat">
+                        <button type="button" class="nut-xoa-het">
+                            @*Xóa hết sản phẩm trong giỏ hàng*@
+                            Xóa hết giỏ hàng
+                        </button>
+                    </div>
+
                 </div>
 
                 <div class="cot-phai">
@@ -148,9 +156,9 @@
 
 
                             @*<div class="dong-tom-tat">
-                    <span>Khuyến mãi</span>
-                    <span>@string.Format("{0:N0}đ", khuyenMai)</span>
-                </div>*@
+                <span>Khuyến mãi</span>
+                <span>@string.Format("{0:N0}đ", khuyenMai)</span>
+            </div>*@
 
                             <div class="dong-tom-tat tong-cong">
                                 <span>Tổng cộng</span>
@@ -158,10 +166,7 @@
                             </div>
                         </div>
 
-                        <a href="/Home/ThanhToan" class="nut-thanh-toan">Tiến hành thanh toán</a>
-
-
-
+                        <a href="/Home/ThanhToan" class="nut-thanh-toan">Tiến hành thanh toán</a>               @*Khi nhấn lệnh này thì dữ liệu trong Database CartItems sẽ tự động xóa*@
 
                     </div>
 
@@ -254,6 +259,23 @@
                     }
                 });
             });
+
+            // Nút xóa hết giỏ hàng
+            $(".nut-xoa-het").click(function () {
+                if (!confirm("Bạn có chắc muốn xóa hết sản phẩm trong giỏ hàng không?")) {
+                    return;
+                }
+
+                $.post("/Home/XoaHetGio", function (res) {
+                    if (res && res.success) {
+                        // Đưa user về trang giỏ (lúc này sẽ là giỏ trống)
+                        window.location.href = "/Home/XemGioHang";
+                    } else {
+                        alert((res && res.message) || "Không thể xóa giỏ hàng.");
+                    }
+                });
+            });
+
         });
     </script>
 

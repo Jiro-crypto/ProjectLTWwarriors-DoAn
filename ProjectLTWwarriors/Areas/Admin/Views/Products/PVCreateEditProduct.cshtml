@@ -15,7 +15,7 @@
 
 <div class="form-group">
     @Html.LabelFor(m => m.Price, "Giá", new { @class = "control-label" })
-    @Html.TextBoxFor(m => m.Price, new { @class = "form-control", type = "number", step = "1000", min = "0" })
+    @Html.TextBoxFor(m => m.Price, new { @class = "form-control", type = "number", step = "1000", min = "0", max = "1000000000" })
     @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
 </div>
 

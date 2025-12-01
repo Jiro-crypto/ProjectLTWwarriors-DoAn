@@ -220,3 +220,21 @@
         grid-template-columns: 1fr; /* Bẻ từ 2 cột → 1 cột (stack dọc) */
     }
 }
+
+
+.nut-xoa-het {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #dc2626;
+    background: #fff5f5;
+    color: #dc2626;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+    .nut-xoa-het:hover {
+        background: #dc2626;
+        color: #fff;
+    }
